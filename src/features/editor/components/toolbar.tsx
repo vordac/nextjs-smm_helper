@@ -164,7 +164,7 @@ export const Toolbar = ({
     <div className="shrink-0 h-[56px] border-b bg-white w-full flex items-center overflow-x-auto z-[49] p-2 gap-x-2">
       {!isImage && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Color" side="bottom" sideOffset={5}>
+          <Hint label="Колір" side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("fill")}
               size="icon"
@@ -183,7 +183,7 @@ export const Toolbar = ({
       )}
       {!isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Stroke color" side="bottom" sideOffset={5}>
+          <Hint label="Колір межі" side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("stroke-color")}
               size="icon"
@@ -202,7 +202,7 @@ export const Toolbar = ({
       )}
       {!isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Stroke width" side="bottom" sideOffset={5}>
+          <Hint label="Ширина межі" side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("stroke-width")}
               size="icon"
@@ -218,7 +218,7 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Font" side="bottom" sideOffset={5}>
+          <Hint label="Шрифт" side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("font")}
               size="icon"
@@ -270,7 +270,7 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Підкреслення" side="bottom" sideOffset={5}>
+          <Hint label="Підкреслений" side="bottom" sideOffset={5}>
             <Button
               onClick={toggleUnderline}
               size="icon"
@@ -286,7 +286,7 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Strike" side="bottom" sideOffset={5}>
+          <Hint label="Закреслений" side="bottom" sideOffset={5}>
             <Button
               onClick={toggleLinethrough}
               size="icon"
@@ -358,7 +358,7 @@ export const Toolbar = ({
       )}
       {isImage && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Filters" side="bottom" sideOffset={5}>
+          <Hint label="Фільтри" side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("filter")}
               size="icon"
@@ -372,7 +372,7 @@ export const Toolbar = ({
           </Hint>
         </div>
       )}
-      {isImage && (
+      {/* {isImage && (
         <div className="flex items-center h-full justify-center">
           <Hint label="Remove background" side="bottom" sideOffset={5}>
             <Button
@@ -387,9 +387,9 @@ export const Toolbar = ({
             </Button>
           </Hint>
         </div>
-      )}
+      )} */}
       <div className="flex items-center h-full justify-center">
-        <Hint label="Bring forward" side="bottom" sideOffset={5}>
+        <Hint label="Перемістити наверх" side="bottom" sideOffset={5}>
           <Button
             onClick={() => editor?.bringForward()}
             size="icon"
@@ -400,7 +400,7 @@ export const Toolbar = ({
         </Hint>
       </div>
       <div className="flex items-center h-full justify-center">
-        <Hint label="Send backwards" side="bottom" sideOffset={5}>
+        <Hint label="Перемістити назад" side="bottom" sideOffset={5}>
           <Button
             onClick={() => editor?.sendBackwards()}
             size="icon"
@@ -411,7 +411,7 @@ export const Toolbar = ({
         </Hint>
       </div>
       <div className="flex items-center h-full justify-center">
-        <Hint label="Opacity" side="bottom" sideOffset={5}>
+        <Hint label="Прозорість" side="bottom" sideOffset={5}>
           <Button
             onClick={() => onChangeActiveTool("opacity")}
             size="icon"
@@ -437,7 +437,7 @@ export const Toolbar = ({
         </Hint>
       </div> */}
       <div className="flex items-center h-full justify-center">
-        <Hint label="Delete" side="bottom" sideOffset={5}>
+        <Hint label="Видалити" side="bottom" sideOffset={5}>
           <Button
             onClick={() => editor?.delete()}
             size="icon"

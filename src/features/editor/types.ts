@@ -116,6 +116,7 @@ export const STROKE_DASH_ARRAY = [];
 export const FONT_FAMILY = "Arial";
 export const FONT_SIZE = 32;
 export const FONT_WEIGHT = 400;
+export const IMAGE_URL = "";
 
 export const CIRCLE_OPTIONS = {
   radius: 225,
@@ -189,6 +190,7 @@ export type BuildEditorProps = {
   // autoZoom: () => void;
   // copy: () => void;
   // paste: () => void;
+  imageUrl: string;
   canvas: fabric.Canvas;
   fillColor: string;
   strokeColor: string;
@@ -196,6 +198,7 @@ export type BuildEditorProps = {
   selectedObjects: fabric.Object[];
   strokeDashArray: number[];
   fontFamily: string;
+  setImageUrl: (value: string) => void;
   setStrokeDashArray: (value: number[]) => void;
   setFillColor: (value: string) => void;
   setStrokeColor: (value: string) => void;
@@ -224,8 +227,10 @@ export interface Editor {
   // onCopy: () => void;
   // onPaste: () => void;
   // changeImageFilter: (value: string) => void;
-  // addImage: (value: string) => void;
-  // delete: () => void;
+  changeImageUrl: (value: string) => void;
+  getImageUrl: (value: string) => void;
+  addImage: (value: string) => void;
+  delete: () => void;
   changeFontSize: (value: number) => void;
   getActiveFontSize: () => number;
   changeTextAlign: (value: string) => void;

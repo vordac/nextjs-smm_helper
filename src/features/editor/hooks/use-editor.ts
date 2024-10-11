@@ -12,6 +12,7 @@ import {
   FONT_FAMILY,
   FONT_SIZE,
   FONT_WEIGHT,
+  IMAGE_URL,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
@@ -24,6 +25,8 @@ import { isTextType } from "@/features/editor/utils";
 
 export const buildEditor = ({
   canvas,
+  imageUrl,
+  setImageUrl,
   fontFamily,
   setFontFamily,
   fillColor,
@@ -279,6 +282,15 @@ export const buildEditor = ({
       canvas.renderAll();
     },
 
+    changeImageUrl: (value: string) => {
+      setImageUrl(value);
+      const activeObject = canvas.getActiveObject();
+      if (activeObject) {
+        activeObject.set({ fill: value });
+        canvas.renderAll();
+      }
+    },
+
     changeStrokeWidth: (value: number) => {
       setStrokeWidth(value);
       canvas.getActiveObjects().forEach((object) => {
@@ -402,6 +414,37 @@ export const buildEditor = ({
       return value;
     },
 
+    getImageUrl: () => {
+      const selectedObject = imageUrl;
+
+      if (!selectedObject) {
+        return FONT_WEIGHT;
+      }
+
+      // @ts-ignore
+      // Faulty TS library, fontWeight exists.
+      const value = selectedObject.get("fontWeight") || FONT_WEIGHT;
+
+      return value as string;
+    },
+
+    addImage: (value: string) => {
+      fabric.Image.fromURL(
+        value,
+        (image) => {
+          const workspace = getWorkspace();
+
+          image.scaleToWidth(workspace?.width || 0);
+          image.scaleToHeight(workspace?.height || 0);
+
+          addToCanvas(image);
+        },
+        {
+          crossOrigin: "anonymous",
+        },
+      );
+    },
+
     getActiveFontFamily: () => {
       const selectedObject = selectedObjects[0];
 
@@ -487,6 +530,7 @@ export const useEditor = ({
   const [strokeWidth, setStrokeWidth] = useState(STROKE_WIDTH);
   const [strokeDashArray, setStrokeDashArray] =
     useState<number[]>(STROKE_DASH_ARRAY);
+  const [imageUrl, setImageUrl] = useState(IMAGE_URL);
 
   useAutoResize({
     canvas,
@@ -503,6 +547,8 @@ export const useEditor = ({
     if (canvas) {
       return buildEditor({
         canvas,
+        imageUrl,
+        setImageUrl,
         fontFamily,
         setFontFamily,
         fillColor,
@@ -520,6 +566,8 @@ export const useEditor = ({
     return undefined;
   }, [
     canvas,
+    imageUrl,
+    setImageUrl,
     fontFamily,
     setFontFamily,
     fillColor,
