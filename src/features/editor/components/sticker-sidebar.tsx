@@ -24,15 +24,15 @@ export const StickerSidebar = ({
   return (
     <aside
       className={cn(
-        "bg-white relative border-r z-[40] w-[360px] h-full flex flex-col",
-        activeTool === "sticker" ? "visible" : "hidden"
+        'bg-white relative border-r z-[40] w-[360px] h-full grid-cols-2',
+        activeTool === 'sticker' ? 'visible' : 'hidden'
       )}
     >
       <ToolSidebarHeader
         title="Стікери"
         description="Додавання стікерів на полотно"
       />
-      <StickerList />
+      <StickerList addStickerToCanvas={editor?.addSticker} />
       <ToolSidebarClose onClick={onClose} />
     </aside>
   );

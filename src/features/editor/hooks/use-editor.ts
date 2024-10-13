@@ -449,8 +449,9 @@ export const buildEditor = ({
       addToCanvas(value);
     },
 
-    addSticker: (value: fabric.Image) => {
-      addToCanvas(value);
+    addSticker: (image: fabric.Image) => {
+      canvas.add(image);
+      canvas.setActiveObject(image);
     },
 
     getActiveFontFamily: () => {

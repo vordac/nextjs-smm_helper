@@ -20,6 +20,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "fabric": "5.3.0-browser",
+    "fs": "^0.0.1-security",
     "hono": "^4.6.4",
     "input": "^1.0.1",
     "jsdom": "^25.0.1",
