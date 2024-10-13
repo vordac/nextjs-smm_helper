@@ -107,7 +107,8 @@ export type ActiveTool =
   | "settings"
   | "ai"
   | "remove-bg"
-  | "templates";
+  | "templates"
+  | "sticker";
 
 export const FILL_COLOR = "rgba(0,0,0,1)";
 export const STROKE_COLOR = "rgba(0,0,0,1)";
@@ -229,7 +230,9 @@ export interface Editor {
   // changeImageFilter: (value: string) => void;
   changeImageUrl: (value: string) => void;
   getImageUrl: (value: string) => void;
-  addImage: (value: string) => void;
+  addImageFile: (value: string) => void;
+  addImageUrl: (value: fabric.Image) => void;
+  addSticker: (value: fabric.Image) => void;
   delete: () => void;
   changeFontSize: (value: number) => void;
   getActiveFontSize: () => number;

@@ -7,10 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 // import { ResponseType } from "@/features/projects/api/use-get-project";
 // import { useUpdateProject } from "@/features/projects/api/use-update-project";
 
-import { 
-  ActiveTool, 
-  selectionDependentTools
-} from "@/features/editor/types";
+import { ActiveTool, selectionDependentTools } from "@/features/editor/types";
 import { Navbar } from "@/features/editor/components/navbar";
 import { Footer } from "@/features/editor/components/footer";
 import { useEditor } from "@/features/editor/hooks/use-editor";
@@ -24,6 +21,7 @@ import { OpacitySidebar } from "@/features/editor/components/opacity-sidebar";
 import { TextSidebar } from "@/features/editor/components/text-sidebar";
 import { FontSidebar } from "./font-sidebar";
 import { ImageSidebar } from "./image-sidebar";
+import { StickerSidebar } from "./sticker-sidebar";
 // import { ImageSidebar } from "./image-sidebar";
 // import { TemplateSidebar } from "./template-sidebar";
 // import { FilterSidebar } from "./filter-sidebar";
@@ -155,6 +153,11 @@ export const Editor = () => {
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
+        <StickerSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
         {/* <TemplateSidebar
           editor={editor}
           activeTool={activeTool}
@@ -192,10 +195,12 @@ export const Editor = () => {
             onChangeActiveTool={onChangeActiveTool}
             key={JSON.stringify(editor?.canvas.getActiveObject())}
           />
-          <div className="flex-1 h-[calc(100%-124px)] bg-muted" ref={containerRef}>
+          <div
+            className="flex-1 h-[calc(100%-124px)] bg-muted"
+            ref={containerRef}
+          >
             <canvas ref={canvasRef} />
           </div>
-          <Footer />
         </main>
       </div>
     </div>

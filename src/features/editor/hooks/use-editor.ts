@@ -428,7 +428,7 @@ export const buildEditor = ({
       return value as string;
     },
 
-    addImage: (value: string) => {
+    addImageFile: (value: string) => {
       fabric.Image.fromURL(
         value,
         (image) => {
@@ -443,6 +443,14 @@ export const buildEditor = ({
           crossOrigin: "anonymous",
         },
       );
+    },
+
+    addImageUrl: (value: fabric.Image) => {
+      addToCanvas(value);
+    },
+
+    addSticker: (value: fabric.Image) => {
+      addToCanvas(value);
     },
 
     getActiveFontFamily: () => {

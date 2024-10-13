@@ -59,12 +59,12 @@ export const Sidebar = ({
           onClick={() => onChangeActiveTool("shapes")}
         />
 
-        {/* ШІ */}
+        {/* Стікери */}
         <SidebarItem
           icon={Sparkles}
-          label="ШІ"
-          isActive={activeTool === "ai"}
-          onClick={() => onChangeActiveTool("ai")}
+          label="Стікери"
+          isActive={activeTool === "sticker"}
+          onClick={() => onChangeActiveTool("sticker")}
         />
 
         {/* Налаштування */}

@@ -4,47 +4,35 @@ import { ToolSidebarHeader } from "@/features/editor/components/tool-sidebar-hea
 import { cn } from "@/lib/utils";
 import ImageUploadPC from "./image-upload-pc";
 import ImageUploadURL from "./image-upload-url";
+import { StickerList } from "./sticker-list";
 
-interface ImageSidebarProps {
+interface StickerSidebarProps {
   editor: Editor | undefined;
   activeTool: ActiveTool;
   onChangeActiveTool: (tool: ActiveTool) => void;
 }
 
-export const ImageSidebar = ({
+export const StickerSidebar = ({
   editor,
   activeTool,
   onChangeActiveTool,
-}: ImageSidebarProps) => {
+}: StickerSidebarProps) => {
   const onClose = () => {
     onChangeActiveTool("select");
-  };
-
-  const addImageToCanvasFile = (imageUrl: string) => {
-    if (editor) {
-      editor.addImageFile(imageUrl);
-    }
-  };
-
-  const addImageToCanvasURL = (imageUrl: fabric.Image) => {
-    if (editor) {
-      editor.addImageUrl(imageUrl);
-    }
   };
 
   return (
     <aside
       className={cn(
         "bg-white relative border-r z-[40] w-[360px] h-full flex flex-col",
-        activeTool === "images" ? "visible" : "hidden"
+        activeTool === "sticker" ? "visible" : "hidden"
       )}
     >
       <ToolSidebarHeader
-        title="Зображення"
-        description="Додавання зображень на полотно"
+        title="Стікери"
+        description="Додавання стікерів на полотно"
       />
-      <ImageUploadPC addImageToCanvas={addImageToCanvasFile} />
-      <ImageUploadURL addImageToCanvas={addImageToCanvasURL} />
+      <StickerList />
       <ToolSidebarClose onClick={onClose} />
     </aside>
   );

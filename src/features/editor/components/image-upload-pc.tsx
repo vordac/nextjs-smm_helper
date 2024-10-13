@@ -8,7 +8,7 @@ interface ImageUploadProps {
   addImageToCanvas: (imageUrl: string) => void;
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ addImageToCanvas }) => {
+const ImageUploadPC: React.FC<ImageUploadProps> = ({ addImageToCanvas }) => {
   const [image, setImage] = useState<string | null>(null);
   const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
   const [isImageError, setIsImageError] = useState<boolean>(false);
@@ -35,7 +35,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ addImageToCanvas }) => {
   };
 
   return (
-    <div className="grid w-full max-w-sm items-center gap-1.5 p-4 ">
+    <div className="grid w-full max-w-sm items-center gap-1.5 p-2 ">
+      <Label htmlFor="picture" className="p-2">Зображення з пристрою</Label>
       <Input className="hover:bg-muted hover:cursor-pointer"
         ref={inputRef}
         id="picture"
@@ -47,4 +48,4 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ addImageToCanvas }) => {
   );
 };
 
-export default ImageUpload;
+export default ImageUploadPC;
