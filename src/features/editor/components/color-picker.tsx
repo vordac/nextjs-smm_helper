@@ -8,6 +8,7 @@ interface ColorPickerProps {
   onChange: (value: string) => void;
 };
 
+
 export const ColorPicker = ({
   value,
   onChange,
