@@ -454,6 +454,11 @@ export const buildEditor = ({
       canvas.setActiveObject(image);
     },
 
+    addEmoji: (image: fabric.Image) => {
+      canvas.add(image);
+      canvas.setActiveObject(image);
+    },
+
     getActiveFontFamily: () => {
       const selectedObject = selectedObjects[0];
 

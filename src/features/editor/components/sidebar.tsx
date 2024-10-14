@@ -7,26 +7,24 @@ import {
   Shapes,
   Sparkles,
   Type,
+  Smile
 } from "lucide-react";
 
 import "../../../app/globals.css";
 
 import { SidebarItem } from "@/features/editor/components/sidebar-item";
 import { ActiveTool } from "@/features/editor/types";
+import { BsEmojiHeartEyes } from "react-icons/bs";
 
 interface SidebarProps {
-    activeTool: ActiveTool;
-    onChangeActiveTool: (tool: ActiveTool) => void;
+  activeTool: ActiveTool;
+  onChangeActiveTool: (tool: ActiveTool) => void;
 }
 
-export const Sidebar = ({
-    activeTool,
-    onChangeActiveTool
-}: SidebarProps) => {
+export const Sidebar = ({ activeTool, onChangeActiveTool }: SidebarProps) => {
   return (
     <aside className="bg-white flex flex-col w-[100px] h-full border-r overflow-y-auto">
       <ul className="flex flex-col">
-
         {/* Дизайн */}
         <SidebarItem
           icon={LayoutTemplate}
@@ -67,6 +65,14 @@ export const Sidebar = ({
           onClick={() => onChangeActiveTool("sticker")}
         />
 
+        {/* Емодзі */}
+        <SidebarItem
+          icon={Smile}
+          label="Емодзі"
+          isActive={activeTool === "emoji"}
+          onClick={() => onChangeActiveTool("emoji")}
+        />
+
         {/* Налаштування */}
         <SidebarItem
           icon={Settings}
@@ -74,7 +80,6 @@ export const Sidebar = ({
           isActive={activeTool === "settings"}
           onClick={() => onChangeActiveTool("settings")}
         />
-
       </ul>
     </aside>
   );

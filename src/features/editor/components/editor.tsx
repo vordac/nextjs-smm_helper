@@ -22,6 +22,7 @@ import { TextSidebar } from "@/features/editor/components/text-sidebar";
 import { FontSidebar } from "./font-sidebar";
 import { ImageSidebar } from "./image-sidebar";
 import { StickerSidebar } from "./sticker-sidebar";
+import { EmojiSidebar } from "./emoji-sidebar";
 // import { ImageSidebar } from "./image-sidebar";
 // import { TemplateSidebar } from "./template-sidebar";
 // import { FilterSidebar } from "./filter-sidebar";
@@ -154,6 +155,11 @@ export const Editor = () => {
           onChangeActiveTool={onChangeActiveTool}
         />
         <StickerSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <EmojiSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
