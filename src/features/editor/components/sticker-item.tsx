@@ -13,5 +13,5 @@ export const StickerItem: React.FC<StickerItemProps> = ({ url, addStickerToCanva
     });
   };
 
-  return <img src={url} alt="sticker" onClick={handleClick} className='w-[96px] hover:cursor-pointer hover:bg-muted'/>;
+  return <img src={url} alt="sticker" onClick={handleClick} className='w-full hover:cursor-pointer hover:bg-muted hover:opacity-80'/>;
 };

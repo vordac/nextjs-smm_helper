@@ -37,7 +37,7 @@ const ImageUploadPC: React.FC<ImageUploadProps> = ({ addImageToCanvas }) => {
   return (
     <div className="grid w-full max-w-sm items-center gap-1.5 p-2 ">
       <Label htmlFor="picture" className="p-2">Зображення з пристрою</Label>
-      <Input className="hover:bg-muted hover:cursor-pointer"
+      <Input className="hover:cursor-pointer"
         ref={inputRef}
         id="picture"
         type="file"
