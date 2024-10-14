@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { fabric } from "fabric";
 import { StickerItem } from "./sticker-item";
-
-// Import all images
-import s1 from "../stickers/image1.png";
-import s2 from "../stickers/2.png";
-import s3 from "../stickers/3.png";
-
 import { ScrollArea } from "@/components/ui/scroll-area";
-// Import all your images here
 
 interface StickerListProps {
   addStickerToCanvas: ((image: fabric.Image) => void) | undefined;
 }
+
+type ImageModule = {
+  default: {
+    src: string;
+    height: number;
+    width: number;
+    blurDataURL: string;
+    blurWidth: number;
+    blurHeight: number;
+  };
+};
 
 export const StickerList: React.FC<StickerListProps> = ({
   addStickerToCanvas,
@@ -20,36 +24,14 @@ export const StickerList: React.FC<StickerListProps> = ({
   const [stickers, setStickers] = useState<string[]>([]);
 
   useEffect(() => {
+    // Create a context for images in the stickers folder
+    const imagesContext = require.context('@/features/editor/stickers', true, /\.(png|jpe?g|svg)$/);
+
     // Create an array of all imported images
-    const importedImages = [
-      s1,
-      s2,
-      s3,
-      s1,
-      s2,
-      s3,
-      s1,
-      s2,
-      s3,
-      s1,
-      s2,
-      s3,
-      s1,
-      s2,
-      s3,
-      s1,
-      s2,
-      s3,
-      s1,
-      s2,
-      s3,
-      s1,
-      s2,
-      s3 /*, add all your images here */,
-    ];
+    const importedImages = imagesContext.keys().map(imagesContext) as ImageModule[];
 
     // Extract the src property of each image and set the stickers state
-    setStickers(importedImages.map((image) => image.src));
+    setStickers(importedImages.map((image) => image.default.src));
   }, []);
 
   const handleAddStickerToCanvas = (image: fabric.Image) => {
@@ -72,3 +54,5 @@ export const StickerList: React.FC<StickerListProps> = ({
     </ScrollArea>
   );
 };
+
+
