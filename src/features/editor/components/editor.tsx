@@ -24,6 +24,7 @@ import { ImageSidebar } from "./image-sidebar";
 import { StickerSidebar } from "./sticker-sidebar";
 import { EmojiSidebar } from "./emoji-sidebar";
 import { FilterSidebar } from "./filter-sidebar";
+import { DrawSidebar } from "./draw-sidebar";
 
 // import { ImageSidebar } from "./image-sidebar";
 // import { TemplateSidebar } from "./template-sidebar";
@@ -51,25 +52,6 @@ export const Editor = () => {
 
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
 
-  const onChangeActiveTool = useCallback(
-    (tool: ActiveTool) => {
-      if (tool === activeTool) {
-        return setActiveTool("select");
-      }
-
-      if (tool === "draw") {
-        // Enable draw
-      }
-
-      if (activeTool === "draw") {
-        // Disable draw
-      }
-
-      setActiveTool(tool);
-    },
-    [activeTool]
-  );
-
   const onClearSelection = useCallback(() => {
     if (selectionDependentTools.includes(activeTool)) {
       setActiveTool("select");
@@ -83,6 +65,25 @@ export const Editor = () => {
     clearSelectionCallback: onClearSelection,
     // saveCallback: debouncedSave,
   });
+
+  const onChangeActiveTool = useCallback(
+    (tool: ActiveTool) => {
+      if (tool === "draw") {
+        editor?.enableDrawingMode();
+      }
+
+      if (activeTool === "draw") {
+        editor?.disableDrawingMode();
+      }
+
+      if (tool === activeTool) {
+        return setActiveTool("select");
+      }
+
+      setActiveTool(tool);
+    },
+    [activeTool, editor]
+  );
 
   const canvasRef = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -167,6 +168,11 @@ export const Editor = () => {
           onChangeActiveTool={onChangeActiveTool}
         />
         <FilterSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <DrawSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
