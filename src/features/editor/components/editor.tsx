@@ -9,7 +9,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { ActiveTool, selectionDependentTools } from "@/features/editor/types";
 import { Navbar } from "@/features/editor/components/navbar";
-import { Footer } from "@/features/editor/components/footer";
 import { useEditor } from "@/features/editor/hooks/use-editor";
 import { Sidebar } from "@/features/editor/components/sidebar";
 import { Toolbar } from "@/features/editor/components/toolbar";
@@ -19,12 +18,14 @@ import { StrokeColorSidebar } from "@/features/editor/components/stroke-color-si
 import { StrokeWidthSidebar } from "@/features/editor/components/stroke-width-sidebar";
 import { OpacitySidebar } from "@/features/editor/components/opacity-sidebar";
 import { TextSidebar } from "@/features/editor/components/text-sidebar";
-import { FontSidebar } from "./font-sidebar";
-import { ImageSidebar } from "./image-sidebar";
-import { StickerSidebar } from "./sticker-sidebar";
-import { EmojiSidebar } from "./emoji-sidebar";
-import { FilterSidebar } from "./filter-sidebar";
-import { DrawSidebar } from "./draw-sidebar";
+import { FontSidebar } from "@/features/editor/components/font-sidebar";
+import { ImageSidebar } from "@/features/editor/components/image-sidebar";
+import { StickerSidebar } from "@/features/editor/components/sticker-sidebar";
+import { EmojiSidebar } from "@/features/editor/components/emoji-sidebar";
+import { FilterSidebar } from "@/features/editor/components/filter-sidebar";
+import { DrawSidebar } from "@/features/editor/components/draw-sidebar";
+import { SettingsSidebar } from "@/features/editor/components/settings-sidebar";
+import { Footer } from "@/features/editor/components/footer";
 
 // import { ImageSidebar } from "./image-sidebar";
 // import { TemplateSidebar } from "./template-sidebar";
@@ -177,6 +178,11 @@ export const Editor = () => {
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
+        <SettingsSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
         {/* <TemplateSidebar
           editor={editor}
           activeTool={activeTool}
@@ -220,6 +226,7 @@ export const Editor = () => {
           >
             <canvas ref={canvasRef} />
           </div>
+          <Footer editor={editor} />
         </main>
       </div>
     </div>

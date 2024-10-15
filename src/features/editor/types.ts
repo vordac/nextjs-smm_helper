@@ -189,7 +189,7 @@ export type BuildEditorProps = {
   // save: (skip?: boolean) => void;
   // canUndo: () => boolean;
   // canRedo: () => boolean;
-  // autoZoom: () => void;
+  autoZoom: () => void;
   copy: () => void;
   paste: () => void;
   imageUrl: string;
@@ -218,12 +218,12 @@ export interface Editor {
   // onRedo: () => void;
   // canUndo: () => boolean;
   // canRedo: () => boolean;
-  // autoZoom: () => void;
-  // zoomIn: () => void;
-  // zoomOut: () => void;
-  // getWorkspace: () => fabric.Object | undefined;
-  // changeBackground: (value: string) => void;
-  // changeSize: (value: { width: number; height: number }) => void;
+  zoomIn: () => void;
+  zoomOut: () => void;
+  getWorkspace: () => fabric.Object | undefined;
+  changeBackground: (value: string) => void;
+  changeSize: (value: { width: number; height: number }) => void;
+  autoZoom: () => void;
   enableDrawingMode: () => void;
   disableDrawingMode: () => void;
   onCopy: () => void;

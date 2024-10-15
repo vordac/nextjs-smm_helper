@@ -27,6 +27,7 @@ import { useClipboard } from "./use-clipboard";
 
 export const buildEditor = ({
   canvas,
+  autoZoom,
   copy,
   paste,
   imageUrl,
@@ -64,6 +65,39 @@ export const buildEditor = ({
   };
 
   return {
+    getWorkspace,
+    autoZoom,
+    zoomIn: () => {
+      let zoomRatio = canvas.getZoom();
+      zoomRatio += 0.05;
+      const center = canvas.getCenter();
+      canvas.zoomToPoint(
+        new fabric.Point(center.left, center.top),
+        zoomRatio > 1 ? 1 : zoomRatio
+      );
+    },
+    zoomOut: () => {
+      let zoomRatio = canvas.getZoom();
+      zoomRatio -= 0.05;
+      const center = canvas.getCenter();
+      canvas.zoomToPoint(
+        new fabric.Point(center.left, center.top),
+        zoomRatio < 0.2 ? 0.2 : zoomRatio,
+      );
+    },
+    changeSize: (value: { width: number; height: number }) => {
+      const workspace = getWorkspace();
+
+      workspace?.set(value);
+      autoZoom();
+      // save();
+    },
+    changeBackground: (value: string) => {
+      const workspace = getWorkspace();
+      workspace?.set({ fill: value });
+      canvas.renderAll();
+      // save();
+    },
     enableDrawingMode: () => {
       canvas.discardActiveObject();
       canvas.renderAll();
@@ -579,7 +613,7 @@ export const useEditor = ({
 
   const { copy, paste } = useClipboard({ canvas });
 
-  useAutoResize({
+  const { autoZoom } = useAutoResize({
     canvas,
     container,
   });
@@ -605,9 +639,9 @@ export const useEditor = ({
         canvas,
         // undo,
         // redo,
+        autoZoom,
         copy,
         paste,
-        // save,
         imageUrl,
         setImageUrl,
         fontFamily,
@@ -627,6 +661,7 @@ export const useEditor = ({
     return undefined;
   }, [
     canvas,
+    autoZoom,
     copy,
     paste,
     imageUrl,
