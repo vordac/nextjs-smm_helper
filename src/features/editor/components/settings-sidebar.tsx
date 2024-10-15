@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 
 import { ActiveTool, Editor } from "@/features/editor/types";
 import { ToolSidebarClose } from "@/features/editor/components/tool-sidebar-close";
@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { fabric } from 'fabric';
 
 interface SettingsSidebarProps {
   editor: Editor | undefined;
@@ -34,6 +35,8 @@ export const SettingsSidebar = ({
   const [width, setWidth] = useState(initialWidth);
   const [height, setHeight] = useState(initialHeight);
   const [background, setBackground] = useState(initialBackground);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setWidth(initialWidth);
@@ -84,7 +87,6 @@ export const SettingsSidebar = ({
       />
       <ScrollArea>
         <form className="space-y-4 p-4" onSubmit={onSubmit}>
-          
           <div className="flex w-full gap-4">
             <div className="space-y-2">
               <Label>Висота</Label>
@@ -109,7 +111,7 @@ export const SettingsSidebar = ({
             Змінити
           </Button>
           <div className="space-y-2">
-            <Label>Пресети</Label>
+            <Label>Пресети Instagram</Label>
             <div className="flex w-full gap-4">
               <Button
                 type="submit"

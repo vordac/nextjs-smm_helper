@@ -151,6 +151,17 @@ export const DIAMOND_OPTIONS = {
   angle: 0,
 };
 
+export const HEART_OPTIONS = {
+  left: 20,
+  top: 0,
+  fill: FILL_COLOR,
+  stroke: STROKE_COLOR,
+  strokeWidth: STROKE_WIDTH,
+  width: 100,
+  height: 100,
+  angle: 0,
+};
+
 export const TRIANGLE_OPTIONS = {
   left: 100,
   top: 100,
@@ -265,6 +276,7 @@ export interface Editor {
   addTriangle: () => void;
   addInverseTriangle: () => void;
   addDiamond: () => void;
+  addHeart: () => void;
   canvas: fabric.Canvas;
   getActiveFillColor: () => string;
   getActiveStrokeColor: () => string;

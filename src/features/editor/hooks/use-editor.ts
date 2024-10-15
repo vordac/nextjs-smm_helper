@@ -12,6 +12,7 @@ import {
   FONT_FAMILY,
   FONT_SIZE,
   FONT_WEIGHT,
+  HEART_OPTIONS,
   IMAGE_URL,
   JSON_KEYS,
   RECTANGLE_OPTIONS,
@@ -22,7 +23,12 @@ import {
   TRIANGLE_OPTIONS,
 } from "../types";
 import { useCanvasEvents } from "@/features/editor/hooks/use-canvas-events";
-import { createFilter, downloadFile, isTextType, transformText } from "@/features/editor/utils";
+import {
+  createFilter,
+  downloadFile,
+  isTextType,
+  transformText,
+} from "@/features/editor/utils";
 import { useHotkeys } from "./use-hotkeys";
 import { useClipboard } from "./use-clipboard";
 import { useHistory } from "./use-history";
@@ -100,7 +106,7 @@ export const buildEditor = ({
 
     await transformText(dataUrl.objects);
     const fileString = `data:text/json;charset=utf-8,${encodeURIComponent(
-      JSON.stringify(dataUrl, null, "\t"),
+      JSON.stringify(dataUrl, null, "\t")
     )}`;
     downloadFile(fileString, "json");
   };
@@ -172,7 +178,6 @@ export const buildEditor = ({
       const workspace = getWorkspace();
       workspace?.set({ fill: value });
       canvas.renderAll();
-      // save();
     },
     enableDrawingMode: () => {
       canvas.discardActiveObject();
@@ -540,9 +545,37 @@ export const buildEditor = ({
           fill: fillColor,
           stroke: strokeColor,
           strokeWidth: strokeWidth,
-          //   strokeDashArray: strokeDashArray,
+          strokeDashArray: strokeDashArray,
         }
       );
+      addToCanvas(object);
+    },
+
+    addHeart: () => {
+      const HEIGHT = HEART_OPTIONS.height;
+      const WIDTH = HEART_OPTIONS.width;
+
+      const object = new fabric.Path(
+        "M 272.70141,238.71731 \
+        C 206.46141,238.71731 152.70146,292.4773 152.70146,358.71731  \
+        C 152.70146,493.47282 288.63461,528.80461 381.26391,662.02535 \
+        C 468.83815,529.62199 609.82641,489.17075 609.82641,358.71731 \
+        C 609.82641,292.47731 556.06651,238.7173 489.82641,238.71731  \
+        C 441.77851,238.71731 400.42481,267.08774 381.26391,307.90481 \
+        C 362.10311,267.08773 320.74941,238.7173 272.70141,238.71731  \
+        z "
+      );
+      object.set({
+        left: 20,
+        top: 0,
+        scaleX: 100 / HEIGHT,
+        scaleY: 100 / WIDTH,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth: strokeWidth,
+        strokeDashArray: strokeDashArray,
+      });
+
       addToCanvas(object);
     },
 

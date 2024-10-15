@@ -1,6 +1,6 @@
 import { IoTriangle } from "react-icons/io5";
 import { FaDiamond } from "react-icons/fa6";
-import { FaCircle, FaSquare, FaSquareFull } from "react-icons/fa";
+import { FaCircle, FaHeart, FaSquare, FaSquareFull } from "react-icons/fa";
 
 import { ActiveTool, Editor } from "@/features/editor/types";
 import { ShapeTool } from "@/features/editor/components/shape-tool";
@@ -62,6 +62,10 @@ export const ShapeSidebar = ({
           <ShapeTool
             onClick={() => editor?.addDiamond()}
             icon={FaDiamond}
+          />
+          <ShapeTool
+            onClick={() => editor?.addHeart()}
+            icon={FaHeart}
           />
         </div>
       </ScrollArea>
