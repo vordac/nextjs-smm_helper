@@ -190,8 +190,8 @@ export type BuildEditorProps = {
   // canUndo: () => boolean;
   // canRedo: () => boolean;
   // autoZoom: () => void;
-  // copy: () => void;
-  // paste: () => void;
+  copy: () => void;
+  paste: () => void;
   imageUrl: string;
   canvas: fabric.Canvas;
   fillColor: string;
@@ -229,6 +229,8 @@ export interface Editor {
   // onCopy: () => void;
   // onPaste: () => void;
   // changeImageFilter: (value: string) => void;
+  onCopy: () => void;
+  onPaste: () => void;
   changeImageFilter: (value: string) => void;
   changeImageUrl: (value: string) => void;
   getImageUrl: (value: string) => void;

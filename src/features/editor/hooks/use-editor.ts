@@ -23,9 +23,12 @@ import {
 import { useCanvasEvents } from "@/features/editor/hooks/use-canvas-events";
 import { createFilter, isTextType } from "@/features/editor/utils";
 import { useHotkeys } from "./use-hotkeys";
+import { useClipboard } from "./use-clipboard";
 
 export const buildEditor = ({
   canvas,
+  copy,
+  paste,
   imageUrl,
   setImageUrl,
   fontFamily,
@@ -61,6 +64,8 @@ export const buildEditor = ({
   };
 
   return {
+    onCopy: () => copy(),
+    onPaste: () => paste(),
     changeImageFilter: (value: string) => {
       const objects = canvas.getActiveObjects();
       objects.forEach((object) => {
@@ -456,7 +461,7 @@ export const buildEditor = ({
         },
         {
           crossOrigin: "anonymous",
-        },
+        }
       );
     },
 
@@ -535,7 +540,6 @@ export const buildEditor = ({
 
       return value;
     },
-    
 
     canvas,
     selectedObjects,
@@ -560,6 +564,8 @@ export const useEditor = ({
   const [strokeDashArray, setStrokeDashArray] =
     useState<number[]>(STROKE_DASH_ARRAY);
   const [imageUrl, setImageUrl] = useState(IMAGE_URL);
+
+  const { copy, paste } = useClipboard({ canvas });
 
   useAutoResize({
     canvas,
@@ -587,8 +593,8 @@ export const useEditor = ({
         canvas,
         // undo,
         // redo,
-        // copy,
-        // paste,
+        copy,
+        paste,
         // save,
         imageUrl,
         setImageUrl,
@@ -609,6 +615,8 @@ export const useEditor = ({
     return undefined;
   }, [
     canvas,
+    copy,
+    paste,
     imageUrl,
     setImageUrl,
     fontFamily,

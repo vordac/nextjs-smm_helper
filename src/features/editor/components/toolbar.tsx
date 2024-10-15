@@ -421,8 +421,8 @@ export const Toolbar = ({
           </Button>
         </Hint>
       </div>
-      {/* <div className="flex items-center h-full justify-center">
-        <Hint label="Duplicate" side="bottom" sideOffset={5}>
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Копія" side="bottom" sideOffset={5}>
           <Button
             onClick={() => {
               editor?.onCopy();
@@ -434,7 +434,7 @@ export const Toolbar = ({
             <Copy className="size-4" />
           </Button>
         </Hint>
-      </div> */}
+      </div>
       <div className="flex items-center h-full justify-center">
         <Hint label="Видалити" side="bottom" sideOffset={5}>
           <Button
