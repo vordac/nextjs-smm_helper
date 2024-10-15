@@ -229,6 +229,7 @@ export interface Editor {
   // onCopy: () => void;
   // onPaste: () => void;
   // changeImageFilter: (value: string) => void;
+  changeImageFilter: (value: string) => void;
   changeImageUrl: (value: string) => void;
   getImageUrl: (value: string) => void;
   addImageFile: (value: string) => void;

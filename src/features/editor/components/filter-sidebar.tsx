@@ -33,8 +33,8 @@ export const FilterSidebar = ({
       )}
     >
       <ToolSidebarHeader
-        title="Filters"
-        description="Apply a filter to selected image"
+        title="Фільтри"
+        description="Додати фільтр обраному зображенню"
       />
       <ScrollArea>
         <div className="p-4 space-y-1 border-b">

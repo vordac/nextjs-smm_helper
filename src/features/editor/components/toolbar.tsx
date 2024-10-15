@@ -17,7 +17,6 @@ import {
   AlignCenter, 
   AlignRight,
   Trash,
-  SquareSplitHorizontal,
   Copy
 } from "lucide-react";
 
