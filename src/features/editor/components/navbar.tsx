@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { BsCloudCheck } from "react-icons/bs";
+import { useFilePicker } from "use-file-picker";
 import { ActiveTool, Editor } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
 
@@ -38,6 +39,21 @@ export const Navbar = ({
   activeTool,
   onChangeActiveTool,
 }: NavbarProps) => {
+
+  const { openFilePicker } = useFilePicker({
+    accept: ".json",
+    onFilesSuccessfullySelected: ({ plainFiles }: any) => {
+      if (plainFiles && plainFiles.length > 0) {
+        const file = plainFiles[0];
+        const reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = () => {
+          editor?.loadJson(reader.result as string);
+        };
+      }
+    },
+  });
+
   return (
     <nav className="w-full flex items-center p-4 h-[68px] gap-x-8 border-b lg:pl=[34px]">
       <Logo />
@@ -51,7 +67,7 @@ export const Navbar = ({
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="min-w-60">
             <DropdownMenuItem
-              onClick={() => {}} // TODO: Додати функціонал
+              onClick={() => openFilePicker()} 
               className="flex items-center gap-x-2"
             >
               <CiFileOn className="size-8" />
@@ -112,8 +128,8 @@ export const Navbar = ({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="min-w-60">
               <DropdownMenuItem
-                onClick={() => {}} // TODO: Додати функціонал
-                className="flex items-center gap-x-2"
+                onClick={() => editor?.saveJson()} // TODO: Додати функціонал
+                className="flex items-center gap-x-2 hover:bg-muted hover:cursor-pointer"
               >
                 <CiFileOn className="size-8" />
                 <div>
@@ -125,8 +141,8 @@ export const Navbar = ({
               </DropdownMenuItem>
 
               <DropdownMenuItem
-                onClick={() => {}} // TODO: Додати функціонал
-                className="flex items-center gap-x-2"
+                onClick={() => editor?.savePng()} // TODO: Додати функціонал
+                className="flex items-center gap-x-2 hover:bg-muted hover:cursor-pointer"
               >
                 <CiFileOn className="size-8" />
                 <div>
@@ -138,8 +154,8 @@ export const Navbar = ({
               </DropdownMenuItem>
 
               <DropdownMenuItem
-                onClick={() => {}} // TODO: Додати функціонал
-                className="flex items-center gap-x-2"
+                onClick={() => editor?.saveJpg()} // TODO: Додати функціонал
+                className="flex items-center gap-x-2 hover:bg-muted hover:cursor-pointer"
               >
                 <CiFileOn className="size-8" />
                 <div>
@@ -151,8 +167,8 @@ export const Navbar = ({
               </DropdownMenuItem>
 
               <DropdownMenuItem
-                onClick={() => {}} // TODO: Додати функціонал
-                className="flex items-center gap-x-2"
+                onClick={() => editor?.saveSvg()} // TODO: Додати функціонал
+                className="flex items-center gap-x-2 hover:bg-muted hover:cursor-pointer"
               >
                 <CiFileOn className="size-8" />
                 <div>
