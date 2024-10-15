@@ -25,7 +25,7 @@ import { EmojiSidebar } from "@/features/editor/components/emoji-sidebar";
 import { FilterSidebar } from "@/features/editor/components/filter-sidebar";
 import { DrawSidebar } from "@/features/editor/components/draw-sidebar";
 import { SettingsSidebar } from "@/features/editor/components/settings-sidebar";
-import { Footer } from "@/features/editor/components/footer";
+import { Zoom } from "@/features/editor/components/zoom";
 
 // import { ImageSidebar } from "./image-sidebar";
 // import { TemplateSidebar } from "./template-sidebar";
@@ -226,7 +226,7 @@ export const Editor = () => {
           >
             <canvas ref={canvasRef} />
           </div>
-          <Footer editor={editor} />
+          
         </main>
       </div>
     </div>

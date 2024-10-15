@@ -5,13 +5,13 @@ import { Editor } from "@/features/editor/types";
 import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
 
-interface FooterProps {
+interface ZoomProps {
   editor: Editor | undefined;
 };
 
-export const Footer = ({ editor }: FooterProps) => {
+export const Zoom = ({ editor }: ZoomProps) => {
   return (
-    <footer className="h-[52px] border-t bg-white w-full flex items-center overflow-x-auto z-[49] p-2 gap-x-1 shrink-0 px-4 flex-row-reverse">
+    <div className="h-[52px]">
       <Hint label="Reset" side="top" sideOffset={10}>
         <Button
           onClick={() => editor?.autoZoom()}
@@ -42,6 +42,6 @@ export const Footer = ({ editor }: FooterProps) => {
           <ZoomOut className="size-4" />
         </Button>
       </Hint>
-    </footer>
+    </div>
   );
 };

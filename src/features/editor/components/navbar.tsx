@@ -27,6 +27,7 @@ import { BsCloudCheck } from "react-icons/bs";
 import { useFilePicker } from "use-file-picker";
 import { ActiveTool, Editor } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
+import { Zoom } from "./zoom";
 
 interface NavbarProps {
   editor: Editor | undefined;
@@ -113,10 +114,7 @@ export const Navbar = ({
         </Hint>
         <Separator orientation="vertical" className="mx-2" />
 
-        <div className="flex items-center gap-x-2">
-          <BsCloudCheck className="size-[20px] text-muted-foreground " />
-          <div className="text-xs text-muted-foreground">Збережено</div>
-        </div>
+        <Zoom editor={editor} />
 
         <div className="ml-auto flex items-center gap-x-4">
           <DropdownMenu modal={false}>
