@@ -15,20 +15,28 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, Download, MousePointerClick, Redo2, Undo2 } from "lucide-react";
+import {
+  ChevronDown,
+  Download,
+  MousePointerClick,
+  Redo2,
+  Undo2,
+} from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { BsCloudCheck } from "react-icons/bs";
-import { ActiveTool } from "@/features/editor/types";
+import { ActiveTool, Editor } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
 
 interface NavbarProps {
-    activeTool: ActiveTool;
-    onChangeActiveTool: (tool: ActiveTool) => void;
+  editor: Editor | undefined;
+  activeTool: ActiveTool;
+  onChangeActiveTool: (tool: ActiveTool) => void;
 }
 
 export const Navbar = ({
-    activeTool,
-    onChangeActiveTool
+  editor,
+  activeTool,
+  onChangeActiveTool,
 }: NavbarProps) => {
   return (
     <nav className="w-full flex items-center p-4 h-[68px] gap-x-8 border-b lg:pl=[34px]">
@@ -49,7 +57,9 @@ export const Navbar = ({
               <CiFileOn className="size-8" />
               <div>
                 <p>Відкрити</p>
-                <p className="text-xs text-muted-foreground">Відкрити JSON-файл</p>
+                <p className="text-xs text-muted-foreground">
+                  Відкрити JSON-файл
+                </p>
               </div>
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -57,30 +67,30 @@ export const Navbar = ({
         <Separator orientation="vertical" className="mx-2" />
         <Hint label="Обрати" side="bottom" sideOffset={10}>
           <Button
-            onClick={() => onChangeActiveTool("select")} 
+            onClick={() => onChangeActiveTool("select")}
             variant="ghost"
             size="icon"
-            className={cn(activeTool === "select" && "bg-gray-100")} 
+            className={cn(activeTool === "select" && "bg-gray-100")}
           >
             <MousePointerClick className="size-4" />
           </Button>
         </Hint>
         <Hint label="Скасувати" side="bottom" sideOffset={10}>
           <Button
-            onClick={() => {}} // TODO: Додати функціонал
+            disabled={!editor?.canUndo()}
             variant="ghost"
             size="icon"
-            className="" //TODO: Додати динамічний клас
+            onClick={() => editor?.onUndo()}
           >
             <Undo2 className="size-4" />
           </Button>
         </Hint>
         <Hint label="Повторити" side="bottom" sideOffset={10}>
           <Button
-            onClick={() => {}} // TODO: Додати функціонал
+            disabled={!editor?.canRedo()}
             variant="ghost"
             size="icon"
-            className="" //TODO: Додати динамічний клас
+            onClick={() => editor?.onRedo()}
           >
             <Redo2 className="size-4" />
           </Button>
@@ -108,7 +118,9 @@ export const Navbar = ({
                 <CiFileOn className="size-8" />
                 <div>
                   <p>JSON</p>
-                  <p className="text-xs text-muted-foreground">Зберегти для редагування</p>
+                  <p className="text-xs text-muted-foreground">
+                    Зберегти для редагування
+                  </p>
                 </div>
               </DropdownMenuItem>
 
@@ -119,7 +131,9 @@ export const Navbar = ({
                 <CiFileOn className="size-8" />
                 <div>
                   <p>PNG</p>
-                  <p className="text-xs text-muted-foreground">Найкраще для використання в Інтернеті</p>
+                  <p className="text-xs text-muted-foreground">
+                    Найкраще для використання в Інтернеті
+                  </p>
                 </div>
               </DropdownMenuItem>
 
@@ -130,7 +144,9 @@ export const Navbar = ({
                 <CiFileOn className="size-8" />
                 <div>
                   <p>JPG</p>
-                  <p className="text-xs text-muted-foreground">Найкраще для печаті</p>
+                  <p className="text-xs text-muted-foreground">
+                    Найкраще для печаті
+                  </p>
                 </div>
               </DropdownMenuItem>
 
@@ -141,7 +157,9 @@ export const Navbar = ({
                 <CiFileOn className="size-8" />
                 <div>
                   <p>SVG</p>
-                  <p className="text-xs text-muted-foreground">Найкраще для векторної графіки</p>
+                  <p className="text-xs text-muted-foreground">
+                    Найкраще для векторної графіки
+                  </p>
                 </div>
               </DropdownMenuItem>
             </DropdownMenuContent>

@@ -13,6 +13,7 @@ import {
   FONT_SIZE,
   FONT_WEIGHT,
   IMAGE_URL,
+  JSON_KEYS,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
@@ -24,9 +25,15 @@ import { useCanvasEvents } from "@/features/editor/hooks/use-canvas-events";
 import { createFilter, isTextType } from "@/features/editor/utils";
 import { useHotkeys } from "./use-hotkeys";
 import { useClipboard } from "./use-clipboard";
+import { useHistory } from "./use-history";
 
 export const buildEditor = ({
   canvas,
+  save,
+  undo,
+  redo,
+  canUndo,
+  canRedo,
   autoZoom,
   copy,
   paste,
@@ -65,6 +72,8 @@ export const buildEditor = ({
   };
 
   return {
+    canUndo,
+    canRedo,
     getWorkspace,
     autoZoom,
     zoomIn: () => {
@@ -82,7 +91,7 @@ export const buildEditor = ({
       const center = canvas.getCenter();
       canvas.zoomToPoint(
         new fabric.Point(center.left, center.top),
-        zoomRatio < 0.2 ? 0.2 : zoomRatio,
+        zoomRatio < 0.2 ? 0.2 : zoomRatio
       );
     },
     changeSize: (value: { width: number; height: number }) => {
@@ -108,6 +117,8 @@ export const buildEditor = ({
     disableDrawingMode: () => {
       canvas.isDrawingMode = false;
     },
+    onUndo: () => undo(),
+    onRedo: () => redo(),
     onCopy: () => copy(),
     onPaste: () => paste(),
     changeImageFilter: (value: string) => {
@@ -611,6 +622,12 @@ export const useEditor = ({
     useState<number[]>(STROKE_DASH_ARRAY);
   const [imageUrl, setImageUrl] = useState(IMAGE_URL);
 
+  const { save, canRedo, canUndo, undo, redo, canvasHistory, setHistoryIndex } =
+    useHistory({
+      canvas,
+      saveCallback,
+    });
+
   const { copy, paste } = useClipboard({ canvas });
 
   const { autoZoom } = useAutoResize({
@@ -618,10 +635,20 @@ export const useEditor = ({
     container,
   });
 
-  useCanvasEvents({
+  useHotkeys({
+    undo,
+    redo,
+    copy,
+    paste,
+    save,
     canvas,
-    container,
+  });
+
+  useCanvasEvents({
+    save,
+    canvas,
     setSelectedObjects,
+    clearSelectionCallback,
   });
 
   // useHotkeys({
@@ -637,8 +664,11 @@ export const useEditor = ({
     if (canvas) {
       return buildEditor({
         canvas,
-        // undo,
-        // redo,
+        save,
+        undo,
+        redo,
+        canUndo,
+        canRedo,
         autoZoom,
         copy,
         paste,
@@ -661,6 +691,11 @@ export const useEditor = ({
     return undefined;
   }, [
     canvas,
+    save,
+    undo,
+    redo,
+    canUndo,
+    canRedo,
     autoZoom,
     copy,
     paste,
@@ -720,16 +755,15 @@ export const useEditor = ({
       setCanvas(initialCanvas);
       setContainer(initialContainer);
 
-      const test = new fabric.Rect({
-        height: 100,
-        width: 100,
-        fill: "black",
-      });
+      const currentState = JSON.stringify(
+        initialCanvas.toJSON(JSON_KEYS)
+      );
+      canvasHistory.current = [currentState];
+      setHistoryIndex(0);
 
-      initialCanvas.add(test);
-      initialCanvas.centerObject(test);
+      
     },
-    []
+    [canvasHistory, setHistoryIndex]
   );
 
   return { init, editor };

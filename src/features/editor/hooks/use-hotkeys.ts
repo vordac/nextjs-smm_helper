@@ -20,7 +20,7 @@ export const useHotkeys = ({
 }: UseHotkeysProps) => {
   useEvent("keydown", (event) => {
     const isCtrlKey = event.ctrlKey || event.metaKey;
-    const isBackspace = event.key === "Backspace";
+    const isBackspace = event.key === "Delete";
     const isInput = ["INPUT", "TEXTAREA"].includes(
       (event.target as HTMLElement).tagName,
     );
