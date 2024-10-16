@@ -164,7 +164,7 @@ export const Navbar = ({
                 </div>
               </DropdownMenuItem>
 
-              <DropdownMenuItem
+              {/* <DropdownMenuItem
                 onClick={() => editor?.saveSvg()} // TODO: Додати функціонал
                 className="flex items-center gap-x-2 hover:bg-muted hover:cursor-pointer"
               >
@@ -175,7 +175,7 @@ export const Navbar = ({
                     Найкраще для векторної графіки
                   </p>
                 </div>
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
