@@ -81,7 +81,7 @@ export const TemplateStories = ({ editor }: TemplateStoriesProps) => {
   return (
     <div className="flex flex-col">
       <div className="pb-4">
-        <Label>Сторіс</Label>
+        <Label>Сторіси</Label>
       </div>
       <div className="grid grid-cols-2 gap-2">
         {storiesPng.map((story, index) => {
