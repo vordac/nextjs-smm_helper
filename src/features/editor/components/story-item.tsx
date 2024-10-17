@@ -14,11 +14,7 @@ export const StoryItem: React.FC<StoryItemProps> = ({
 }) => {
   const handleClick = () => {
     if (json) {
-      if (editor?.loadJson) {
-        editor?.loadJson(json)
-      } else {
-        console.log("changeStories is undefined");
-      }
+      editor?.loadJson(json)
     } else {
       console.log("json is undefined");
     }

@@ -40,10 +40,12 @@ export const TemplateStories = ({ editor }: TemplateStoriesProps) => {
       const jsonMap: { [key: string]: string } = {};
       const jsonPromises = jsonContext.keys().map(async (key) => {
         try {
-          const json = await import(`@/features/templates/stories/json/${key.replace('./', '')}`);
+          const json = await import(
+            `@/features/templates/stories/json/${key.replace("./", "")}`
+          );
           console.log(`Fetched JSON file: ${key}`);
-          console.log(`Parsed JSON data: ${JSON.stringify(json)}`);
-          return { key, json };
+          console.log(`Parsed JSON data: ${JSON.stringify(json.default)}`);
+          return { key, json: json.default };
         } catch (error) {
           console.error(error);
           return null;
@@ -55,7 +57,12 @@ export const TemplateStories = ({ editor }: TemplateStoriesProps) => {
       importedJsons.forEach((jsonData) => {
         if (jsonData) {
           const { key, json } = jsonData;
-          const filename = key.split("/").pop()?.split(".").slice(0, -1).join(".");
+          const filename = key
+            .split("/")
+            .pop()
+            ?.split(".")
+            .slice(0, -1)
+            .join(".");
           if (filename) {
             jsonMap[filename] = JSON.stringify(json);
           }
@@ -73,22 +80,22 @@ export const TemplateStories = ({ editor }: TemplateStoriesProps) => {
 
   return (
     <div className="flex flex-col">
-      <div>
+      <div className="pb-4">
         <Label>Сторіс</Label>
       </div>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 gap-2">
         {storiesPng.map((story, index) => {
           console.log("story:", story);
           const filename = story
             .split("/")
             .pop()
             ?.split(".")
-            .slice(0, -1)
-            .join(".");
+            .slice(0, -2)
+            .join("");
           console.log("filename:", filename);
-          const json = filename ? storiesJson[filename] : "ZHOPA";
+          console.log("storiesJson:", storiesJson);
+          const json = filename ? storiesJson[filename] : "";
           console.log("json:", json);
-          console.log("storiesJson:", storiesJson); // Added console.log here
           return (
             <StoryItem key={index} url={story} editor={editor} json={json} />
           );
