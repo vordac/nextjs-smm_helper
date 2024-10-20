@@ -163,19 +163,6 @@ export const Navbar = ({
                   </p>
                 </div>
               </DropdownMenuItem>
-
-              {/* <DropdownMenuItem
-                onClick={() => editor?.saveSvg()} // TODO: Додати функціонал
-                className="flex items-center gap-x-2 hover:bg-muted hover:cursor-pointer"
-              >
-                <CiFileOn className="size-8" />
-                <div>
-                  <p>SVG</p>
-                  <p className="text-xs text-muted-foreground">
-                    Найкраще для векторної графіки
-                  </p>
-                </div>
-              </DropdownMenuItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
