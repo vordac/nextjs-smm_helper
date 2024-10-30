@@ -78,7 +78,6 @@ export const buildEditor = ({
     const dataUrl = canvas.toDataURL(options);
 
     downloadFile(dataUrl, "png");
-    autoZoom();
   };
 
   const saveSvg = () => {
@@ -88,7 +87,6 @@ export const buildEditor = ({
     const dataUrl = canvas.toDataURL(options);
 
     downloadFile(dataUrl, "svg");
-    autoZoom();
   };
 
   const saveJpg = () => {
@@ -98,7 +96,6 @@ export const buildEditor = ({
     const dataUrl = canvas.toDataURL(options);
 
     downloadFile(dataUrl, "jpg");
-    autoZoom();
   };
 
   const saveJson = async () => {
@@ -115,7 +112,6 @@ export const buildEditor = ({
     const data = JSON.parse(json);
 
     canvas.loadFromJSON(data, () => {
-      autoZoom();
     });
   };
 
@@ -171,7 +167,6 @@ export const buildEditor = ({
       const workspace = getWorkspace();
 
       workspace?.set(value);
-      autoZoom();
       // save();
     },
     changeBackground: (value: string) => {
@@ -477,7 +472,7 @@ export const buildEditor = ({
         fill: fillColor,
         stroke: strokeColor,
         strokeWidth: strokeWidth,
-        // strokeDashArray: strokeDashArray,
+        strokeDashArray: strokeDashArray,
       });
 
       addToCanvas(object);
@@ -575,7 +570,7 @@ export const buildEditor = ({
         strokeWidth: strokeWidth,
         strokeDashArray: strokeDashArray,
       });
-
+      
       addToCanvas(object);
     },
 
@@ -646,7 +641,6 @@ export const buildEditor = ({
       // @ts-ignore
       // Faulty TS library, fontFamily exists.
       const value = selectedObject.get("fontFamily") || fontFamily;
-
       return value;
     },
 
@@ -704,9 +698,6 @@ export const buildEditor = ({
 };
 
 export const useEditor = ({
-  defaultState,
-  defaultHeight,
-  defaultWidth,
   clearSelectionCallback,
   saveCallback,
 }: EditorHookProps) => {
@@ -751,14 +742,14 @@ export const useEditor = ({
     clearSelectionCallback,
   });
 
-  // useHotkeys({
-  //   undo,
-  //   redo,
-  //   copy,
-  //   paste,
-  //   save,
-  //   canvas,
-  // });
+  useHotkeys({
+    undo,
+    redo,
+    copy,
+    paste,
+    save,
+    canvas,
+  });
 
   const editor = useMemo(() => {
     if (canvas) {
@@ -833,7 +824,7 @@ export const useEditor = ({
       });
 
       const initialWorkspace = new fabric.Rect({
-        width: 900,
+        width: 1200,
         height: 1200,
         name: "clip",
         fill: "white",
