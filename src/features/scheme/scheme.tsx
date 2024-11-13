@@ -17,6 +17,12 @@ import { CiFileOn } from "react-icons/ci";
 import { ChevronDown } from "lucide-react";
 import CssFilterConverter from "css-filter-converter";
 import { Input } from "@/components/ui/input";
+import { Unbounded } from "next/font/google";
+
+const unbounded = Unbounded({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const Scheme = () => {
   const [schemeType, setSchemeType] = useState("triade");
@@ -580,560 +586,567 @@ export const Scheme = () => {
   };
 
   return (
-    <div className="bg-primary h-lvh flex">
-      {/* Sidebar */}
+      <div className="bg-primary h-lvh flex">
+        {/* Sidebar */}
+        <div className={unbounded.className}>
+        <div className="bg-muted w-[360px] flex flex-col gap-y-4 p-2 h-full">
+          <div className="text-primary font-bold text-[20px] p-2 flex items-center justify-center rounded-md">
+            Кольорова схема
+          </div>
+          <div className="flex items-center">
+            <Input
+              className="bg-muted hover:bg-secondary text-primary hover:text-primary transition text-sm font-bold"
+              placeholder="Ваш колір у HEX"
+              value={userColor}
+              onChange={(e) => setUserColor(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-between items-center ">
+            <p className="text-primary font-bold text-sm">Схема:</p>
+            <DropdownMenu modal={false}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="hover:bg-secondary hover:text-muted h-[40px]"
+                >
+                  <p className="text-primary font-bold text-sm">
+                    {schemeTypeString}
+                  </p>
+                  <ChevronDown className="size-4 ml-2 text-primary" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="start"
+                className="min-w-60 bg-primary"
+              >
+                <DropdownMenuItem
+                  onClick={() => setSchemeType("mono")}
+                  className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
+                >
+                  <div className="text-muted">
+                    <p>
+                      <b>Монохроматична</b>
+                    </p>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setSchemeType("contrast")}
+                  className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
+                >
+                  <div className="text-muted">
+                    <p>
+                      <b>Контрастна</b>
+                    </p>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setSchemeType("triade")}
+                  className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
+                >
+                  <div className="text-muted">
+                    <p>
+                      <b>Тріадична</b>
+                    </p>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setSchemeType("analogic")}
+                  className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
+                >
+                  <div className="text-muted">
+                    <p>
+                      <b>Аналогова</b>
+                    </p>
+                  </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
 
-      <div className="bg-muted w-[360px] flex flex-col gap-y-4 p-2">
-        <div className="text-primary font-bold text-[20px] p-2 flex items-center justify-center rounded-md">
-          Кольорова схема
+          <div className="flex justify-between items-center">
+            <p className="text-primary font-bold text-sm">Варіація:</p>
+            <DropdownMenu modal={false}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="hover:bg-secondary hover:text-muted h-[40px]"
+                >
+                  <p className="text-primary font-bold text-sm">
+                    {schemeVariationString}
+                  </p>
+                  <ChevronDown className="size-4 ml-2 text-primary" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="start"
+                className="min-w-60 bg-primary"
+              >
+                <DropdownMenuItem
+                  onClick={() => setSchemeVariation("default")}
+                  className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
+                >
+                  <div className="text-muted">
+                    <p>
+                      <b>Стандартна</b>
+                    </p>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setSchemeVariation("pastel")}
+                  className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
+                >
+                  <div className="text-muted">
+                    <p>
+                      <b>Пастельна</b>
+                    </p>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setSchemeVariation("soft")}
+                  className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
+                >
+                  <div className="text-muted">
+                    <p>
+                      <b>М'яка</b>
+                    </p>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setSchemeVariation("light")}
+                  className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
+                >
+                  <div className="text-muted">
+                    <p>
+                      <b>Світла</b>
+                    </p>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setSchemeVariation("hard")}
+                  className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
+                >
+                  <div className="text-muted">
+                    <p>
+                      <b>Тяжка</b>
+                    </p>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setSchemeVariation("pale")}
+                  className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
+                >
+                  <div className="text-muted">
+                    <p>
+                      <b>Бліда</b>
+                    </p>
+                  </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <Button
+            size="lg"
+            variant="ghost"
+            className="bg-primary text-muted p-2 hover:bg-third text-md font-bold"
+            onClick={newPalette}
+          >
+            <p>ЗГЕНЕРУВАТИ КОЛЬОРИ</p>
+          </Button>
+          <div className="flex flex-col text-primary text-md ">
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color1)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef1}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 1: </b>
+                {"#" + color1}
+              </div>
+            </div>
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color2)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef2}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 2: </b>
+                {"#" + color2}
+              </div>
+            </div>
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color3)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef3}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 3: </b>
+                {"#" + color3}
+              </div>
+            </div>
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color4)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef4}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 4: </b>
+                {"#" + color4}
+              </div>
+            </div>
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color5)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef5}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 5: </b>
+                {"#" + color5}
+              </div>
+            </div>
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color6)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef6}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 6: </b>
+                {"#" + color6}
+              </div>
+            </div>
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color7)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef7}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 7: </b>
+                {"#" + color7}
+              </div>
+            </div>
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color8)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef8}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 8: </b>
+                {"#" + color8}
+              </div>
+            </div>
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color9)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef9}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 9: </b>
+                {"#" + color9}
+              </div>
+            </div>
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color10)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef10}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 10: </b>
+                {"#" + color10}
+              </div>
+            </div>
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color11)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef11}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 11: </b>
+                {"#" + color11}
+              </div>
+            </div>
+            <div
+              className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
+              onClick={() => copyToClipboard("#" + color12)}
+            >
+              <div
+                className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
+                ref={divColorRef12}
+                id="divColorId1"
+              ></div>
+              <div>
+                <b>Колір 12: </b>
+                {"#" + color12}
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center">
-          <Input
-            className="bg-muted hover:bg-secondary text-primary hover:text-primary transition text-md font-bold"
-            placeholder="Ваш колір у HEX"
-            value={userColor}
-            onChange={(e) => setUserColor(e.target.value)}
-          />
         </div>
-        <div className="flex justify-between items-center">
-          <p className="text-primary font-bold text-lg">Схема:</p>
-          <DropdownMenu modal={false}>
-            <DropdownMenuTrigger asChild>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="hover:bg-secondary hover:text-muted h-[40px]"
-              >
-                <p className="text-primary font-bold text-lg">
-                  {schemeTypeString}
-                </p>
-                <ChevronDown className="size-4 ml-2 text-primary" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="min-w-60 bg-primary">
-              <DropdownMenuItem
-                onClick={() => setSchemeType("mono")}
-                className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
-              >
-                <div className="text-muted">
-                  <p>
-                    <b>Монохроматична</b>
-                  </p>
-                </div>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setSchemeType("contrast")}
-                className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
-              >
-                <div className="text-muted">
-                  <p>
-                    <b>Контрастна</b>
-                  </p>
-                </div>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setSchemeType("triade")}
-                className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
-              >
-                <div className="text-muted">
-                  <p>
-                    <b>Тріадична</b>
-                  </p>
-                </div>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setSchemeType("analogic")}
-                className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
-              >
-                <div className="text-muted">
-                  <p>
-                    <b>Аналогова</b>
-                  </p>
-                </div>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+        <div className="w-full flex">
+          <div className="bg-primary flex flex-col items-center justify-center p-6 flex-1">
+            <div className="bg-white h-[760px] w-[380px] flex flex-col">
+              <div className="flex items-center justify-around p-4 gap-x-2">
+                {/* Аватарка */}
+                <div
+                  className="bg-muted rounded-full w-[80px] h-[80px] hover:cursor-pointer hover:opacity-80 transition"
+                  ref={profilePicRef}
+                  id="profilePicId"
+                  onClick={(event) => handleDivClick(event, color1)}
+                />
 
-        <div className="flex justify-between items-center">
-          <p className="text-primary font-bold text-lg">Варіація:</p>
-          <DropdownMenu modal={false}>
-            <DropdownMenuTrigger asChild>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="hover:bg-secondary hover:text-muted h-[40px]"
-              >
-                <p className="text-primary font-bold text-lg">
-                  {schemeVariationString}
-                </p>
-                <ChevronDown className="size-4 ml-2 text-primary" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="min-w-60 bg-primary">
-              <DropdownMenuItem
-                onClick={() => setSchemeVariation("default")}
-                className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
-              >
-                <div className="text-muted">
-                  <p>
-                    <b>Стандартна</b>
-                  </p>
+                <div className="flex flex-col items-center justify-center text-sm text-black">
+                  <p className="font-bold">0</p>
+                  <p>Дописи</p>
                 </div>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setSchemeVariation("pastel")}
-                className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
-              >
-                <div className="text-muted">
-                  <p>
-                    <b>Пастельна</b>
-                  </p>
+                <div className="flex flex-col items-center justify-center text-sm text-black">
+                  <p className="font-bold">0</p>
+                  <p>Читачі</p>
                 </div>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setSchemeVariation("soft")}
-                className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
-              >
-                <div className="text-muted">
-                  <p>
-                    <b>М'яка</b>
-                  </p>
+                <div className="flex flex-col items-center justify-center text-sm text-black">
+                  <p className="font-bold">0</p>
+                  <p>Відстежуються</p>
                 </div>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setSchemeVariation("light")}
-                className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
-              >
-                <div className="text-muted">
-                  <p>
-                    <b>Світла</b>
-                  </p>
+              </div>
+
+              <div className="flex items-center justify-around px-2 py-4 text-sm gap-x-2">
+                <div className="bg-sky-400 py-1.5 rounded-lg text-primary flex-1 text-center font-semibold">
+                  Стежити
                 </div>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setSchemeVariation("hard")}
-                className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
-              >
-                <div className="text-muted">
-                  <p>
-                    <b>Тяжка</b>
-                  </p>
+                <div className="bg-gray-200 py-1.5 rounded-lg text-black flex-1 text-center font-semibold">
+                  Повідомлення
                 </div>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setSchemeVariation("pale")}
-                className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
-              >
-                <div className="text-muted">
-                  <p>
-                    <b>Бліда</b>
-                  </p>
+              </div>
+
+              <div className="flex justify-evenly text-sm text-black mb-4 px-2">
+                <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
+                  <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
+                    {/* Сторис */}
+                    <div
+                      className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
+                      ref={stories1Ref}
+                      id="stories1Id"
+                      onClick={(event) => handleDivClick(event, color2)}
+                    ></div>
+                  </div>
+                  <div>WORK</div>
                 </div>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-        <Button
-          size="lg"
-          variant="ghost"
-          className="bg-primary text-muted p-2 hover:bg-third text-lg font-bold"
-          onClick={newPalette}
-        >
-          <p>ЗГЕНЕРУВАТИ КОЛЬОРИ</p>
-        </Button>
-        <div className="flex flex-col text-primary text-lg ">
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color1)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef1}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 1: </b>
-              {"#" + color1}
-            </div>
-          </div>
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color2)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef2}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 2: </b>
-              {"#" + color2}
-            </div>
-          </div>
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color3)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef3}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 3: </b>
-              {"#" + color3}
-            </div>
-          </div>
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color4)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef4}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 4: </b>
-              {"#" + color4}
-            </div>
-          </div>
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color5)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef5}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 5: </b>
-              {"#" + color5}
-            </div>
-          </div>
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color6)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef6}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 6: </b>
-              {"#" + color6}
-            </div>
-          </div>
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color7)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef7}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 7: </b>
-              {"#" + color7}
-            </div>
-          </div>
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color8)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef8}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 8: </b>
-              {"#" + color8}
-            </div>
-          </div>
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color9)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef9}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 9: </b>
-              {"#" + color9}
-            </div>
-          </div>
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color10)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef10}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 10: </b>
-              {"#" + color10}
-            </div>
-          </div>
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color11)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef11}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 11: </b>
-              {"#" + color11}
-            </div>
-          </div>
-          <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
-            onClick={() => copyToClipboard("#" + color12)}
-          >
-            <div
-              className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
-              ref={divColorRef12}
-              id="divColorId1"
-            ></div>
-            <div>
-              <b>Колір 12: </b>
-              {"#" + color12}
+                <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
+                  <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
+                    {/* Сторис */}
+                    <div
+                      className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
+                      ref={stories2Ref}
+                      onClick={(event) => handleDivClick(event, color3)}
+                    ></div>
+                  </div>
+                  <div>sum'24</div>
+                </div>
+                <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
+                  <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
+                    {/* Сторис */}
+                    <div
+                      className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
+                      ref={stories3Ref}
+                      id="stories3Id"
+                      onClick={(event) => handleDivClick(event, color4)}
+                    ></div>
+                  </div>
+                  <div>BEST</div>
+                </div>
+                <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
+                  <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
+                    {/* Сторис */}
+                    <div
+                      className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
+                      ref={stories4Ref}
+                      id="stories4Id"
+                      onClick={(event) => handleDivClick(event, color5)}
+                    ></div>
+                  </div>
+                  <div>LIFE</div>
+                </div>
+                <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
+                  <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
+                    {/* Сторис */}
+                    <div
+                      className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
+                      ref={stories5Ref}
+                      id="stories5Id"
+                      onClick={(event) => handleDivClick(event, color6)}
+                    ></div>
+                  </div>
+                  <div>SMTHNG</div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 flex-1 gap-y-0.5 gap-x-0.5 text-black font-bold auto-rows-fr auto-cols-fr ">
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post1Ref}
+                  id="post1Id"
+                  onClick={(event) => handleDivClick(event, color1)}
+                >
+                  крупний план
+                </div>
+
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post2Ref}
+                  id="post2Id"
+                  onClick={(event) => handleDivClick(event, color2)}
+                >
+                  текст
+                </div>
+
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post3Ref}
+                  id="post3Id"
+                  onClick={(event) => handleDivClick(event, color3)}
+                >
+                  деталі
+                </div>
+
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post4Ref}
+                  id="post4Id"
+                  onClick={(event) => handleDivClick(event, color4)}
+                >
+                  архітектура
+                </div>
+
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post5Ref}
+                  id="post5Id"
+                  onClick={(event) => handleDivClick(event, color5)}
+                >
+                  середній план
+                </div>
+
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post6Ref}
+                  id="post6Id"
+                  onClick={(event) => handleDivClick(event, color6)}
+                >
+                  дальній план
+                </div>
+
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post7Ref}
+                  id="post7Id"
+                  onClick={(event) => handleDivClick(event, color7)}
+                >
+                  деталі
+                </div>
+
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post8Ref}
+                  id="post8Id"
+                  onClick={(event) => handleDivClick(event, color8)}
+                >
+                  текст
+                </div>
+
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post9Ref}
+                  id="post9Id"
+                  onClick={(event) => handleDivClick(event, color9)}
+                >
+                  портрет
+                </div>
+
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post10Ref}
+                  id="post10Id"
+                  onClick={(event) => handleDivClick(event, color10)}
+                >
+                  дальній план
+                </div>
+
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post11Ref}
+                  id="post11Id"
+                  onClick={(event) => handleDivClick(event, color11)}
+                >
+                  крупний план
+                </div>
+
+                {/* Пост */}
+                <div
+                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                  ref={post12Ref}
+                  id="post12Id"
+                  onClick={(event) => handleDivClick(event, color12)}
+                >
+                  природа
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="w-full flex">
-        <div className="bg-primary flex flex-col items-center justify-center p-6 flex-1">
-          <div className="bg-white h-[760px] w-[380px] flex flex-col">
-            <div className="flex items-center justify-around p-4 gap-x-2">
-              {/* Аватарка */}
-              <div
-                className="bg-muted rounded-full w-[80px] h-[80px] hover:cursor-pointer hover:opacity-80 transition"
-                ref={profilePicRef}
-                id="profilePicId"
-                onClick={(event) => handleDivClick(event, color1)}
-              />
-
-              <div className="flex flex-col items-center justify-center text-sm text-black">
-                <p className="font-bold">0</p>
-                <p>Дописи</p>
-              </div>
-              <div className="flex flex-col items-center justify-center text-sm text-black">
-                <p className="font-bold">0</p>
-                <p>Читачі</p>
-              </div>
-              <div className="flex flex-col items-center justify-center text-sm text-black">
-                <p className="font-bold">0</p>
-                <p>Відстежуються</p>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-around px-2 py-4 text-sm gap-x-2">
-              <div className="bg-sky-400 py-1.5 rounded-lg text-primary flex-1 text-center font-semibold">
-                Стежити
-              </div>
-              <div className="bg-gray-200 py-1.5 rounded-lg text-black flex-1 text-center font-semibold">
-                Повідомлення
-              </div>
-            </div>
-
-            <div className="flex justify-evenly text-sm text-black mb-4 px-2">
-              <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
-                <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
-                  {/* Сторис */}
-                  <div
-                    className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
-                    ref={stories1Ref}
-                    id="stories1Id"
-                    onClick={(event) => handleDivClick(event, color2)}
-                  ></div>
-                </div>
-                <div>WORK</div>
-              </div>
-              <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
-                <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
-                  {/* Сторис */}
-                  <div
-                    className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
-                    ref={stories2Ref}
-                    onClick={(event) => handleDivClick(event, color3)}
-                  ></div>
-                </div>
-                <div>sum'24</div>
-              </div>
-              <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
-                <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
-                  {/* Сторис */}
-                  <div
-                    className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
-                    ref={stories3Ref}
-                    id="stories3Id"
-                    onClick={(event) => handleDivClick(event, color4)}
-                  ></div>
-                </div>
-                <div>BEST</div>
-              </div>
-              <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
-                <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
-                  {/* Сторис */}
-                  <div
-                    className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
-                    ref={stories4Ref}
-                    id="stories4Id"
-                    onClick={(event) => handleDivClick(event, color5)}
-                  ></div>
-                </div>
-                <div>LIFE</div>
-              </div>
-              <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
-                <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
-                  {/* Сторис */}
-                  <div
-                    className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
-                    ref={stories5Ref}
-                    id="stories5Id"
-                    onClick={(event) => handleDivClick(event, color6)}
-                  ></div>
-                </div>
-                <div>SMTHNG</div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-3 flex-1 gap-y-0.5 gap-x-0.5 text-black font-bold auto-rows-fr auto-cols-fr ">
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post1Ref}
-                id="post1Id"
-                onClick={(event) => handleDivClick(event, color1)}
-              >
-                крупний план
-              </div>
-
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post2Ref}
-                id="post2Id"
-                onClick={(event) => handleDivClick(event, color2)}
-              >
-                текст
-              </div>
-
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post3Ref}
-                id="post3Id"
-                onClick={(event) => handleDivClick(event, color3)}
-              >
-                деталі
-              </div>
-
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post4Ref}
-                id="post4Id"
-                onClick={(event) => handleDivClick(event, color4)}
-              >
-                архітектура
-              </div>
-
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post5Ref}
-                id="post5Id"
-                onClick={(event) => handleDivClick(event, color5)}
-              >
-                середній план
-              </div>
-
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post6Ref}
-                id="post6Id"
-                onClick={(event) => handleDivClick(event, color6)}
-              >
-                дальній план
-              </div>
-
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post7Ref}
-                id="post7Id"
-                onClick={(event) => handleDivClick(event, color7)}
-              >
-                деталі
-              </div>
-
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post8Ref}
-                id="post8Id"
-                onClick={(event) => handleDivClick(event, color8)}
-              >
-                текст
-              </div>
-
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post9Ref}
-                id="post9Id"
-                onClick={(event) => handleDivClick(event, color9)}
-              >
-                портрет
-              </div>
-
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post10Ref}
-                id="post10Id"
-                onClick={(event) => handleDivClick(event, color10)}
-              >
-                дальній план
-              </div>
-
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post11Ref}
-                id="post11Id"
-                onClick={(event) => handleDivClick(event, color11)}
-              >
-                крупний план
-              </div>
-
-              {/* Пост */}
-              <div
-                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                ref={post12Ref}
-                id="post12Id"
-                onClick={(event) => handleDivClick(event, color12)}
-              >
-                природа
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 };

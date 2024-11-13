@@ -23,6 +23,12 @@ import { DrawSidebar } from "@/features/editor/components/sidebar/draw-sidebar";
 import { SettingsSidebar } from "@/features/editor/components/sidebar/settings-sidebar";
 import { TemplateSidebar } from "@/features/editor/components/sidebar/template-sidebar";
 import { useAutoResize } from "../../hooks/use-auto-resize";
+import { Unbounded } from "next/font/google";
+
+const unbounded = Unbounded({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const Editor = () => {
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
@@ -75,116 +81,118 @@ export const Editor = () => {
   }, [init]);
 
   return (
-    <div className="h-full flex flex-col bg-primary">
-      <Navbar
-        editor={editor}
-        activeTool={activeTool}
-        onChangeActiveTool={onChangeActiveTool}
-      />
-      <div className="absolute h-[calc(100%-48px)] w-full top-[48px] flex bg-primary">
-        <Sidebar
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <ShapeSidebar
+    <div className={unbounded.className}>
+      <div className="h-full flex flex-col bg-primary">
+        <Navbar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
+        <div className="absolute h-[calc(100%-48px)] w-full top-[48px] flex bg-primary">
+          <Sidebar
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
 
-        <FillColorSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <StrokeColorSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <StrokeWidthSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <OpacitySidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <TextSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <FontSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <ImageSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <StickerSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <EmojiSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <FilterSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <DrawSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <SettingsSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <TemplateSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-
-        <main className="bg-primary flex-1 overflow-auto relative flex flex-col">
-          <Toolbar
+          <ShapeSidebar
             editor={editor}
             activeTool={activeTool}
             onChangeActiveTool={onChangeActiveTool}
-            key={JSON.stringify(editor?.canvas.getActiveObject())}
           />
-          <div
-            className="flex-1 h-[calc(100%-64px)] bg-primary"
-            ref={containerRef}
-          >
-            <canvas ref={canvasRef} />
-          </div>
-        </main>
+
+          <FillColorSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <StrokeColorSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <StrokeWidthSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <OpacitySidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <TextSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <FontSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <ImageSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <StickerSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <EmojiSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <FilterSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <DrawSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <SettingsSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <TemplateSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+
+          <main className="bg-primary flex-1 overflow-auto relative flex flex-col">
+            <Toolbar
+              editor={editor}
+              activeTool={activeTool}
+              onChangeActiveTool={onChangeActiveTool}
+              key={JSON.stringify(editor?.canvas.getActiveObject())}
+            />
+            <div
+              className="flex-1 h-[calc(100%-64px)] bg-primary"
+              ref={containerRef}
+            >
+              <canvas ref={canvasRef} />
+            </div>
+          </main>
+        </div>
       </div>
     </div>
   );
