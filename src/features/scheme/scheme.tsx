@@ -16,12 +16,14 @@ import { DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { CiFileOn } from "react-icons/ci";
 import { ChevronDown } from "lucide-react";
 import CssFilterConverter from "css-filter-converter";
+import { Input } from "@/components/ui/input";
 
-export const Workspace = () => {
+export const Scheme = () => {
   const [schemeType, setSchemeType] = useState("triade");
   const [schemeVariation, setSchemeVariation] = useState("soft");
   const [schemeTypeString, setSchemeTypeString] = useState("");
   const [schemeVariationString, setSchemeVariationString] = useState("");
+  const [userColor, setUserColor] = useState("");
 
   const profilePicRef = useRef<HTMLDivElement>(null);
 
@@ -70,6 +72,8 @@ export const Workspace = () => {
   const [color11, setColor11] = useState("3C49F6");
   const [color12, setColor12] = useState("3C49F6");
 
+  var hexToHsl = require("hex-to-hsl");
+
   useEffect(() => {
     if (schemeType === "mono") {
       setSchemeTypeString("Монохроматична");
@@ -108,77 +112,105 @@ export const Workspace = () => {
 
   const newPalette = () => {
     if (schemeType === "mono") {
-      const hue = Math.random() * (100 - 1 + 1) + 1;
-      var ColorScheme = require("color-scheme");
-      var scheme = new ColorScheme();
-      scheme.from_hue(hue).scheme(schemeType).variation(schemeVariation);
-      setColor1(scheme.colors()[0]);
-      setColor2(scheme.colors()[1]);
-      setColor3(scheme.colors()[2]);
-      setColor4(scheme.colors()[3]);
-      setColor5(scheme.colors()[0]);
-      setColor6(scheme.colors()[1]);
-      setColor7(scheme.colors()[2]);
-      setColor8(scheme.colors()[3]);
-      setColor9(scheme.colors()[0]);
-      setColor10(scheme.colors()[1]);
-      setColor11(scheme.colors()[2]);
-      setColor12(scheme.colors()[3]);
+      if (userColor) {
+        const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+        if (hexColorRegex.test(userColor)) {
+          const hue = hexToHsl(userColor)[0];
+          var ColorScheme = require("color-scheme");
+          var scheme = new ColorScheme();
+          scheme.from_hue(hue).scheme(schemeType).variation(schemeVariation);
+          setColor1(scheme.colors()[0]);
+          setColor2(scheme.colors()[1]);
+          setColor3(scheme.colors()[2]);
+          setColor4(scheme.colors()[3]);
+          setColor5(scheme.colors()[0]);
+          setColor6(scheme.colors()[1]);
+          setColor7(scheme.colors()[2]);
+          setColor8(scheme.colors()[3]);
+          setColor9(scheme.colors()[0]);
+          setColor10(scheme.colors()[1]);
+          setColor11(scheme.colors()[2]);
+          setColor12(scheme.colors()[3]);
+        } else {
+          alert("Введіть колір у форматі HEX");
+        }
+      } else alert("Введіть колір");
     }
     if (schemeType === "contrast") {
-      const hue = Math.random() * (100 - 1 + 1) + 1;
-      var ColorScheme = require("color-scheme");
-      var scheme = new ColorScheme();
-      scheme.from_hue(hue).scheme(schemeType).variation(schemeVariation);
-      setColor1(scheme.colors()[0]);
-      setColor2(scheme.colors()[1]);
-      setColor3(scheme.colors()[2]);
-      setColor4(scheme.colors()[3]);
-      setColor5(scheme.colors()[4]);
-      setColor6(scheme.colors()[5]);
-      setColor7(scheme.colors()[6]);
-      setColor8(scheme.colors()[7]);
-      setColor9(scheme.colors()[0]);
-      setColor10(scheme.colors()[1]);
-      setColor11(scheme.colors()[2]);
-      setColor12(scheme.colors()[3]);
+      if (userColor) {
+        const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+        if (hexColorRegex.test(userColor)) {
+          const hue = hexToHsl(userColor)[0];
+          var ColorScheme = require("color-scheme");
+          var scheme = new ColorScheme();
+          scheme.from_hue(hue).scheme(schemeType).variation(schemeVariation);
+          setColor1(scheme.colors()[0]);
+          setColor2(scheme.colors()[1]);
+          setColor3(scheme.colors()[2]);
+          setColor4(scheme.colors()[3]);
+          setColor5(scheme.colors()[4]);
+          setColor6(scheme.colors()[5]);
+          setColor7(scheme.colors()[6]);
+          setColor8(scheme.colors()[7]);
+          setColor9(scheme.colors()[0]);
+          setColor10(scheme.colors()[1]);
+          setColor11(scheme.colors()[2]);
+          setColor12(scheme.colors()[3]);
+        } else {
+          alert("Введіть колір у форматі HEX");
+        }
+      } else alert("Введіть колір");
     }
     if (schemeType === "triade") {
-      const hue = Math.random() * (100 - 1 + 1) + 1;
-      var ColorScheme = require("color-scheme");
-      var scheme = new ColorScheme();
-      scheme.from_hue(hue).scheme(schemeType).variation(schemeVariation);
-      setColor1(scheme.colors()[0]);
-      setColor2(scheme.colors()[1]);
-      setColor3(scheme.colors()[2]);
-      setColor4(scheme.colors()[3]);
-      setColor5(scheme.colors()[4]);
-      setColor6(scheme.colors()[5]);
-      setColor7(scheme.colors()[6]);
-      setColor8(scheme.colors()[7]);
-      setColor9(scheme.colors()[8]);
-      setColor10(scheme.colors()[9]);
-      setColor11(scheme.colors()[10]);
-      setColor12(scheme.colors()[11]);
+      if (userColor) {
+        const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+        if (hexColorRegex.test(userColor)) {
+          const hue = hexToHsl(userColor)[0];
+          var ColorScheme = require("color-scheme");
+          var scheme = new ColorScheme();
+          scheme.from_hue(hue).scheme(schemeType).variation(schemeVariation);
+          setColor1(scheme.colors()[0]);
+          setColor2(scheme.colors()[1]);
+          setColor3(scheme.colors()[2]);
+          setColor4(scheme.colors()[3]);
+          setColor5(scheme.colors()[4]);
+          setColor6(scheme.colors()[5]);
+          setColor7(scheme.colors()[6]);
+          setColor8(scheme.colors()[7]);
+          setColor9(scheme.colors()[0]);
+          setColor10(scheme.colors()[1]);
+          setColor11(scheme.colors()[2]);
+          setColor12(scheme.colors()[3]);
+        } else {
+          alert("Введіть колір у форматі HEX");
+        }
+      } else alert("Введіть колір");
     }
 
     if (schemeType === "analogic") {
-      const hue = Math.random() * (100 - 1 + 1) + 1;
-      var ColorScheme = require("color-scheme");
-      var scheme = new ColorScheme();
-      scheme.from_hue(hue).scheme(schemeType).variation(schemeVariation);
-      setColor1(scheme.colors()[0]);
-      setColor2(scheme.colors()[1]);
-      setColor3(scheme.colors()[2]);
-      setColor4(scheme.colors()[3]);
-      setColor5(scheme.colors()[4]);
-      setColor6(scheme.colors()[5]);
-      setColor7(scheme.colors()[6]);
-      setColor8(scheme.colors()[7]);
-      setColor9(scheme.colors()[8]);
-      setColor10(scheme.colors()[9]);
-      setColor11(scheme.colors()[10]);
-      setColor12(scheme.colors()[11]);
+      if (userColor) {
+        const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+        if (hexColorRegex.test(userColor)) {
+          const hue = hexToHsl(userColor)[0];
+          var ColorScheme = require("color-scheme");
+          var scheme = new ColorScheme();
+          scheme.from_hue(hue).scheme(schemeType).variation(schemeVariation);
+          setColor1(scheme.colors()[0]);
+          setColor2(scheme.colors()[1]);
+          setColor3(scheme.colors()[2]);
+          setColor4(scheme.colors()[3]);
+          setColor5(scheme.colors()[4]);
+          setColor6(scheme.colors()[5]);
+          setColor7(scheme.colors()[6]);
+          setColor8(scheme.colors()[7]);
+          setColor9(scheme.colors()[8]);
+          setColor10(scheme.colors()[9]);
+          setColor11(scheme.colors()[10]);
+          setColor12(scheme.colors()[11]);
+        } else {
+          alert("Введіть колір у форматі HEX");
+        }
+      } else alert("Введіть колір");
     }
   };
 
@@ -550,7 +582,19 @@ export const Workspace = () => {
   return (
     <div className="bg-primary h-lvh flex">
       {/* Sidebar */}
+
       <div className="bg-muted w-[360px] flex flex-col gap-y-4 p-2">
+        <div className="text-primary font-bold text-[20px] p-2 flex items-center justify-center rounded-md">
+          Кольорова схема
+        </div>
+        <div className="flex items-center">
+          <Input
+            className="bg-muted hover:bg-secondary text-primary hover:text-primary transition text-md font-bold"
+            placeholder="Ваш колір у HEX"
+            value={userColor}
+            onChange={(e) => setUserColor(e.target.value)}
+          />
+        </div>
         <div className="flex justify-between items-center">
           <p className="text-primary font-bold text-lg">Схема:</p>
           <DropdownMenu modal={false}>
@@ -700,9 +744,8 @@ export const Workspace = () => {
         </Button>
         <div className="flex flex-col text-primary text-lg ">
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color1)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
@@ -715,9 +758,8 @@ export const Workspace = () => {
             </div>
           </div>
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color2)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
@@ -730,9 +772,8 @@ export const Workspace = () => {
             </div>
           </div>
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color3)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
@@ -745,9 +786,8 @@ export const Workspace = () => {
             </div>
           </div>
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color4)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
@@ -760,9 +800,8 @@ export const Workspace = () => {
             </div>
           </div>
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color5)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
@@ -775,9 +814,8 @@ export const Workspace = () => {
             </div>
           </div>
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color6)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
@@ -790,9 +828,8 @@ export const Workspace = () => {
             </div>
           </div>
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color7)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
@@ -805,9 +842,8 @@ export const Workspace = () => {
             </div>
           </div>
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color8)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
@@ -820,9 +856,8 @@ export const Workspace = () => {
             </div>
           </div>
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color9)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
@@ -835,9 +870,8 @@ export const Workspace = () => {
             </div>
           </div>
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color10)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
@@ -850,9 +884,8 @@ export const Workspace = () => {
             </div>
           </div>
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color11)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
@@ -865,9 +898,8 @@ export const Workspace = () => {
             </div>
           </div>
           <div
-            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-2 rounded-sm"
+            className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
             onClick={() => copyToClipboard("#" + color12)}
-
           >
             <div
               className="h-[24px] w-[24px] rounded-full mr-2 border-2 border-black"
