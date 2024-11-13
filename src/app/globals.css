@@ -36,6 +36,8 @@ body {
     --secondary: 238, 100%, 83%;
     --muted: 236, 91%, 60%;
     --accentive: 11, 100%, 68%;
+    --third: 11, 100%, 68%;
+    --third-foreground: 11, 100%, 68%;
     --radius: 0.5rem;
     --border: 238, 100%, 83%;
   }

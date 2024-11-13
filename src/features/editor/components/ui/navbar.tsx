@@ -1,8 +1,8 @@
 "use client";
 
-import { Logo } from "@/features/editor/components/ui/logo";
-
 import "../../../../app/globals.css";
+
+import router, { useRouter } from "next/router";
 
 import { CiFileOn } from "react-icons/ci";
 
@@ -21,6 +21,7 @@ import {
   MousePointerClick,
   Redo2,
   Undo2,
+  X,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { BsCloudCheck } from "react-icons/bs";
@@ -28,6 +29,7 @@ import { useFilePicker } from "use-file-picker";
 import { ActiveTool, Editor } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
 import { Zoom } from "@/features/editor/components/tools/zoom";
+import Link from "next/link";
 
 interface NavbarProps {
   editor: Editor | undefined;
@@ -40,7 +42,6 @@ export const Navbar = ({
   activeTool,
   onChangeActiveTool,
 }: NavbarProps) => {
-
   const { openFilePicker } = useFilePicker({
     accept: ".json",
     onFilesSuccessfullySelected: ({ plainFiles }: any) => {
@@ -56,24 +57,29 @@ export const Navbar = ({
   });
 
   return (
-    <nav className="w-full flex items-center p-3 h-[48px] gap-x-8 lg:pl=[48px] bg-muted">
-      <Logo/>
+    <nav className="w-full flex items-center p-3 h-[48px] lg:pl=[48px] bg-muted">
       <div className="w-full flex items-center gap-x-1 h-full">
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
-            <Button size="sm" variant="ghost" className="hover:bg-secondary hover:text-muted h-[40px]">
+            <Button
+              size="sm"
+              variant="ghost"
+              className="hover:bg-secondary hover:text-muted h-[40px]"
+            >
               <p className="text-primary">Файл</p>
               <ChevronDown className="size-4 ml-2 text-primary" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="min-w-60 bg-primary">
             <DropdownMenuItem
-              onClick={() => openFilePicker()} 
+              onClick={() => openFilePicker()}
               className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
             >
               <CiFileOn className="size-8 text-muted" />
               <div className="text-muted">
-                <p><b>Відкрити проєкт</b></p>
+                <p>
+                  <b>Відкрити проєкт</b>
+                </p>
               </div>
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -84,7 +90,11 @@ export const Navbar = ({
             onClick={() => onChangeActiveTool("select")}
             variant="ghost"
             size="icon"
-            className={cn(activeTool === "select" && "hover:bg-secondary hover:text-primary bg-secondary text-primary" || "hover:bg-secondary hover:text-primary text-primary")}
+            className={cn(
+              (activeTool === "select" &&
+                "hover:bg-secondary hover:text-primary bg-secondary text-primary") ||
+                "hover:bg-secondary hover:text-primary text-primary"
+            )}
           >
             <MousePointerClick className="size-4" />
           </Button>
@@ -128,7 +138,9 @@ export const Navbar = ({
               >
                 <CiFileOn className="size-8 text-muted" />
                 <div className="text-muted">
-                  <p><b>JSON</b></p>
+                  <p>
+                    <b>JSON</b>
+                  </p>
                   <p className="text-xs text-muted-foreground">
                     Зберегти для редагування
                   </p>
@@ -136,12 +148,14 @@ export const Navbar = ({
               </DropdownMenuItem>
 
               <DropdownMenuItem
-                onClick={() => editor?.savePng()} 
+                onClick={() => editor?.savePng()}
                 className="flex items-center gap-x-2 hover:bg-secondary hover:cursor-pointer transition"
               >
                 <CiFileOn className="size-8 text-muted" />
                 <div className="text-muted">
-                  <p><b>PNG</b></p>
+                  <p>
+                    <b>PNG</b>
+                  </p>
                   <p className="text-xs text-muted-foreground">
                     Найкраще для використання в Інтернеті
                   </p>
@@ -154,13 +168,23 @@ export const Navbar = ({
               >
                 <CiFileOn className="size-8 text-muted" />
                 <div className="text-muted">
-                  <p><b>JPG</b></p>
-                  <p className="text-xs">
-                    Найкраще для печаті
+                  <p>
+                    <b>JPG</b>
                   </p>
+                  <p className="text-xs">Найкраще для печаті</p>
                 </div>
               </DropdownMenuItem>
             </DropdownMenuContent>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="hover:bg-secondary"
+            >
+              <Link href="/" target="_blank" className="text-primary">
+                Вийти з редактору
+              </Link>
+              <X className="size-4 ml-2 text-primary" />
+            </Button>
           </DropdownMenu>
         </div>
       </div>
