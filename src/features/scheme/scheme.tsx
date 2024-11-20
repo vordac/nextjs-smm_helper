@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
@@ -13,11 +12,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DropdownMenuContent } from "@/components/ui/dropdown-menu";
-import { CiFileOn } from "react-icons/ci";
 import { ChevronDown } from "lucide-react";
 import CssFilterConverter from "css-filter-converter";
 import { Input } from "@/components/ui/input";
 import { Unbounded } from "next/font/google";
+import { useRouter } from "next/navigation";
+import { ColorPicker } from "../editor/components/tools/color-picker";
+import rgbHex from "rgb-hex";
 
 const unbounded = Unbounded({
   subsets: ["latin"],
@@ -116,7 +117,20 @@ export const Scheme = () => {
     }
   }, [schemeVariation]);
 
+  useEffect(() => {
+    if (userColor) {
+      const rgbaMatch = userColor.match(
+        /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*\.?\d+))?\)/
+      );
+      if (rgbaMatch) {
+        const [r, g, b] = rgbaMatch.slice(1, 4).map(Number);
+        setUserColor("#" + rgbHex(r, g, b));
+      }
+    }
+  }, [userColor]);
+
   const newPalette = () => {
+    console.log(userColor);
     if (schemeType === "mono") {
       if (userColor) {
         const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
@@ -142,6 +156,7 @@ export const Scheme = () => {
         }
       } else alert("Введіть колір");
     }
+    console.log(userColor);
     if (schemeType === "contrast") {
       if (userColor) {
         const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
@@ -167,6 +182,7 @@ export const Scheme = () => {
         }
       } else alert("Введіть колір");
     }
+    console.log(userColor);
     if (schemeType === "triade") {
       if (userColor) {
         const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
@@ -192,7 +208,7 @@ export const Scheme = () => {
         }
       } else alert("Введіть колір");
     }
-
+    console.log(userColor);
     if (schemeType === "analogic") {
       if (userColor) {
         const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
@@ -335,6 +351,7 @@ export const Scheme = () => {
         const hueRotate = filterFromColor.color.match(
           /hue-rotate\((\d+)deg\)/
         )?.[1];
+
         stories1Ref.current.style.filter = `hue-rotate(${hueRotate}deg)`;
         stories1Ref.current.style.mixBlendMode = "multiply";
       }
@@ -585,21 +602,115 @@ export const Scheme = () => {
     });
   };
 
+  const router = useRouter();
+
+  const handleExitScheme = () => {
+    router.push("/");
+  };
+
+  const resetImages = () => {
+    if (profilePicRef.current) {
+      profilePicRef.current.style.backgroundImage = "none";
+    }
+    if (stories1Ref.current) {
+      stories1Ref.current.style.backgroundImage = "none";
+    }
+    if (stories2Ref.current) {
+      stories2Ref.current.style.backgroundImage = "none";
+    }
+    if (stories3Ref.current) {
+      stories3Ref.current.style.backgroundImage = "none";
+    }
+    if (stories4Ref.current) {
+      stories4Ref.current.style.backgroundImage = "none";
+    }
+    if (stories5Ref.current) {
+      stories5Ref.current.style.backgroundImage = "none";
+    }
+
+    if (post1Ref.current) {
+      post1Ref.current.style.backgroundImage = "none";
+    }
+    if (post2Ref.current) {
+      post2Ref.current.style.backgroundImage = "none";
+    }
+    if (post3Ref.current) {
+      post3Ref.current.style.backgroundImage = "none";
+    }
+    if (post4Ref.current) {
+      post4Ref.current.style.backgroundImage = "none";
+    }
+    if (post5Ref.current) {
+      post5Ref.current.style.backgroundImage = "none";
+    }
+    if (post6Ref.current) {
+      post6Ref.current.style.backgroundImage = "none";
+    }
+    if (post7Ref.current) {
+      post7Ref.current.style.backgroundImage = "none";
+    }
+    if (post8Ref.current) {
+      post8Ref.current.style.backgroundImage = "none";
+    }
+    if (post9Ref.current) {
+      post9Ref.current.style.backgroundImage = "none";
+    }
+    if (post10Ref.current) {
+      post10Ref.current.style.backgroundImage = "none";
+    }
+    if (post11Ref.current) {
+      post11Ref.current.style.backgroundImage = "none";
+    }
+    if (post12Ref.current) {
+      post12Ref.current.style.backgroundImage = "none";
+    }
+
+    if (divColorRef1.current) {
+      divColorRef1.current.style.backgroundImage = "none";
+    }
+    if (divColorRef2.current) {
+      divColorRef2.current.style.backgroundImage = "none";
+    }
+    if (divColorRef3.current) {
+      divColorRef3.current.style.backgroundImage = "none";
+    }
+    if (divColorRef4.current) {
+      divColorRef4.current.style.backgroundImage = "none";
+    }
+    if (divColorRef5.current) {
+      divColorRef5.current.style.backgroundImage = "none";
+    }
+    if (divColorRef6.current) {
+      divColorRef6.current.style.backgroundImage = "none";
+    }
+
+    if (divColorRef7.current) {
+      divColorRef7.current.style.backgroundImage = "none";
+    }
+    if (divColorRef8.current) {
+      divColorRef8.current.style.backgroundImage = "none";
+    }
+    if (divColorRef9.current) {
+      divColorRef9.current.style.backgroundImage = "none";
+    }
+    if (divColorRef10.current) {
+      divColorRef10.current.style.backgroundImage = "none";
+    }
+    if (divColorRef11.current) {
+      divColorRef11.current.style.backgroundImage = "none";
+    }
+    if (divColorRef12.current) {
+      divColorRef12.current.style.backgroundImage = "none";
+    }
+  };
+
   return (
-      <div className="bg-primary h-lvh flex">
-        {/* Sidebar */}
-        <div className={unbounded.className}>
-        <div className="bg-muted w-[360px] flex flex-col gap-y-4 p-2 h-full">
-          <div className="text-primary font-bold text-[20px] p-2 flex items-center justify-center rounded-md">
-            Кольорова схема
-          </div>
-          <div className="flex items-center">
-            <Input
-              className="bg-muted hover:bg-secondary text-primary hover:text-primary transition text-sm font-bold"
-              placeholder="Ваш колір у HEX"
-              value={userColor}
-              onChange={(e) => setUserColor(e.target.value)}
-            />
+    <div className="bg-primary flex h-lvh">
+      {/* Sidebar */}
+      <div className={unbounded.className}>
+        <div className="bg-muted w-[360px] flex flex-col justify-start gap-y-4 p-2 h-lvh">
+          <div className="flex h-full">
+            <ColorPicker value={userColor} onChange={setUserColor} />
           </div>
           <div className="flex justify-between items-center ">
             <p className="text-primary font-bold text-sm">Схема:</p>
@@ -752,8 +863,243 @@ export const Scheme = () => {
             className="bg-primary text-muted p-2 hover:bg-third text-md font-bold"
             onClick={newPalette}
           >
-            <p>ЗГЕНЕРУВАТИ КОЛЬОРИ</p>
+            <p>ЗГЕНЕРУВАТИ ВІЗУАЛ</p>
           </Button>
+
+          <Button
+            size="lg"
+            variant="ghost"
+            className="bg-primary text-muted p-2 hover:bg-third text-md font-bold"
+            onClick={handleExitScheme}
+          >
+            <p>ВИЙТИ ЗІ СХЕМИ</p>
+          </Button>
+        </div>
+      </div>
+      <div className="w-full flex h-full">
+        <div className="bg-primary flex flex-col items-center justify-center p-6 flex-1">
+          <div className="bg-white h-[760px] w-[380px] flex flex-col">
+            <div className="flex items-center justify-around p-4 gap-x-2">
+              {/* Аватарка */}
+              <div
+                className="bg-muted rounded-full w-[80px] h-[80px] hover:cursor-pointer hover:opacity-80 transition"
+                ref={profilePicRef}
+                id="profilePicId"
+                onClick={(event) => handleDivClick(event, color1)}
+              />
+
+              <div className="flex flex-col items-center justify-center text-sm text-black">
+                <p className="font-bold">0</p>
+                <p>Дописи</p>
+              </div>
+              <div className="flex flex-col items-center justify-center text-sm text-black">
+                <p className="font-bold">0</p>
+                <p>Читачі</p>
+              </div>
+              <div className="flex flex-col items-center justify-center text-sm text-black">
+                <p className="font-bold">0</p>
+                <p>Відстежуються</p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-around px-2 py-4 text-sm gap-x-2">
+              <div className="bg-sky-400 py-1.5 rounded-lg text-primary flex-1 text-center font-semibold">
+                Стежити
+              </div>
+              <div className="bg-gray-200 py-1.5 rounded-lg text-black flex-1 text-center font-semibold">
+                Повідомлення
+              </div>
+            </div>
+
+            <div className="flex justify-evenly text-sm text-black mb-4 px-2">
+              <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
+                <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
+                  {/* Сторис */}
+                  <div
+                    className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
+                    ref={stories1Ref}
+                    id="stories1Id"
+                    onClick={(event) => handleDivClick(event, color2)}
+                  ></div>
+                </div>
+                <div>WORK</div>
+              </div>
+              <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
+                <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
+                  {/* Сторис */}
+                  <div
+                    className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
+                    ref={stories2Ref}
+                    onClick={(event) => handleDivClick(event, color3)}
+                  ></div>
+                </div>
+                <div>sum'24</div>
+              </div>
+              <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
+                <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
+                  {/* Сторис */}
+                  <div
+                    className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
+                    ref={stories3Ref}
+                    id="stories3Id"
+                    onClick={(event) => handleDivClick(event, color4)}
+                  ></div>
+                </div>
+                <div>BEST</div>
+              </div>
+              <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
+                <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
+                  {/* Сторис */}
+                  <div
+                    className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
+                    ref={stories4Ref}
+                    id="stories4Id"
+                    onClick={(event) => handleDivClick(event, color5)}
+                  ></div>
+                </div>
+                <div>LIFE</div>
+              </div>
+              <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
+                <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
+                  {/* Сторис */}
+                  <div
+                    className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
+                    ref={stories5Ref}
+                    id="stories5Id"
+                    onClick={(event) => handleDivClick(event, color6)}
+                  ></div>
+                </div>
+                <div>SMTHNG</div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 flex-1 gap-y-0.5 gap-x-0.5 text-black font-bold auto-rows-fr auto-cols-fr ">
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post1Ref}
+                id="post1Id"
+                onClick={(event) => handleDivClick(event, color1)}
+              >
+                крупний план
+              </div>
+
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post2Ref}
+                id="post2Id"
+                onClick={(event) => handleDivClick(event, color2)}
+              >
+                текст
+              </div>
+
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post3Ref}
+                id="post3Id"
+                onClick={(event) => handleDivClick(event, color3)}
+              >
+                деталі
+              </div>
+
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post4Ref}
+                id="post4Id"
+                onClick={(event) => handleDivClick(event, color4)}
+              >
+                архітектура
+              </div>
+
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post5Ref}
+                id="post5Id"
+                onClick={(event) => handleDivClick(event, color5)}
+              >
+                середній план
+              </div>
+
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post6Ref}
+                id="post6Id"
+                onClick={(event) => handleDivClick(event, color6)}
+              >
+                дальній план
+              </div>
+
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post7Ref}
+                id="post7Id"
+                onClick={(event) => handleDivClick(event, color7)}
+              >
+                деталі
+              </div>
+
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post8Ref}
+                id="post8Id"
+                onClick={(event) => handleDivClick(event, color8)}
+              >
+                текст
+              </div>
+
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post9Ref}
+                id="post9Id"
+                onClick={(event) => handleDivClick(event, color9)}
+              >
+                портрет
+              </div>
+
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post10Ref}
+                id="post10Id"
+                onClick={(event) => handleDivClick(event, color10)}
+              >
+                дальній план
+              </div>
+
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post11Ref}
+                id="post11Id"
+                onClick={(event) => handleDivClick(event, color11)}
+              >
+                крупний план
+              </div>
+
+              {/* Пост */}
+              <div
+                className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
+                ref={post12Ref}
+                id="post12Id"
+                onClick={(event) => handleDivClick(event, color12)}
+              >
+                природа
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Sidebar */}
+      <div className={unbounded.className}>
+        <div className="bg-muted w-[360px] flex flex-col gap-y-4 p-2 h-full">
           <div className="flex flex-col text-primary text-md ">
             <div
               className="flex items-center my-1 hover:cursor-pointer hover:bg-secondary transition p-1 rounded-sm"
@@ -924,229 +1270,16 @@ export const Scheme = () => {
               </div>
             </div>
           </div>
-        </div>
-        </div>
-        <div className="w-full flex">
-          <div className="bg-primary flex flex-col items-center justify-center p-6 flex-1">
-            <div className="bg-white h-[760px] w-[380px] flex flex-col">
-              <div className="flex items-center justify-around p-4 gap-x-2">
-                {/* Аватарка */}
-                <div
-                  className="bg-muted rounded-full w-[80px] h-[80px] hover:cursor-pointer hover:opacity-80 transition"
-                  ref={profilePicRef}
-                  id="profilePicId"
-                  onClick={(event) => handleDivClick(event, color1)}
-                />
-
-                <div className="flex flex-col items-center justify-center text-sm text-black">
-                  <p className="font-bold">0</p>
-                  <p>Дописи</p>
-                </div>
-                <div className="flex flex-col items-center justify-center text-sm text-black">
-                  <p className="font-bold">0</p>
-                  <p>Читачі</p>
-                </div>
-                <div className="flex flex-col items-center justify-center text-sm text-black">
-                  <p className="font-bold">0</p>
-                  <p>Відстежуються</p>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-around px-2 py-4 text-sm gap-x-2">
-                <div className="bg-sky-400 py-1.5 rounded-lg text-primary flex-1 text-center font-semibold">
-                  Стежити
-                </div>
-                <div className="bg-gray-200 py-1.5 rounded-lg text-black flex-1 text-center font-semibold">
-                  Повідомлення
-                </div>
-              </div>
-
-              <div className="flex justify-evenly text-sm text-black mb-4 px-2">
-                <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
-                  <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
-                    {/* Сторис */}
-                    <div
-                      className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
-                      ref={stories1Ref}
-                      id="stories1Id"
-                      onClick={(event) => handleDivClick(event, color2)}
-                    ></div>
-                  </div>
-                  <div>WORK</div>
-                </div>
-                <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
-                  <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
-                    {/* Сторис */}
-                    <div
-                      className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
-                      ref={stories2Ref}
-                      onClick={(event) => handleDivClick(event, color3)}
-                    ></div>
-                  </div>
-                  <div>sum'24</div>
-                </div>
-                <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
-                  <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
-                    {/* Сторис */}
-                    <div
-                      className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
-                      ref={stories3Ref}
-                      id="stories3Id"
-                      onClick={(event) => handleDivClick(event, color4)}
-                    ></div>
-                  </div>
-                  <div>BEST</div>
-                </div>
-                <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
-                  <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
-                    {/* Сторис */}
-                    <div
-                      className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
-                      ref={stories4Ref}
-                      id="stories4Id"
-                      onClick={(event) => handleDivClick(event, color5)}
-                    ></div>
-                  </div>
-                  <div>LIFE</div>
-                </div>
-                <div className="flex flex-col items-center justify-center flex-1 gap-y-2">
-                  <div className="border-2 border-gray-200 p-0.5 w-[64px] h-[64px] rounded-full flex items-center justify-center">
-                    {/* Сторис */}
-                    <div
-                      className="bg-muted w-full h-full rounded-full hover:cursor-pointer hover:opacity-80 transition"
-                      ref={stories5Ref}
-                      id="stories5Id"
-                      onClick={(event) => handleDivClick(event, color6)}
-                    ></div>
-                  </div>
-                  <div>SMTHNG</div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 flex-1 gap-y-0.5 gap-x-0.5 text-black font-bold auto-rows-fr auto-cols-fr ">
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post1Ref}
-                  id="post1Id"
-                  onClick={(event) => handleDivClick(event, color1)}
-                >
-                  крупний план
-                </div>
-
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post2Ref}
-                  id="post2Id"
-                  onClick={(event) => handleDivClick(event, color2)}
-                >
-                  текст
-                </div>
-
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post3Ref}
-                  id="post3Id"
-                  onClick={(event) => handleDivClick(event, color3)}
-                >
-                  деталі
-                </div>
-
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post4Ref}
-                  id="post4Id"
-                  onClick={(event) => handleDivClick(event, color4)}
-                >
-                  архітектура
-                </div>
-
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post5Ref}
-                  id="post5Id"
-                  onClick={(event) => handleDivClick(event, color5)}
-                >
-                  середній план
-                </div>
-
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post6Ref}
-                  id="post6Id"
-                  onClick={(event) => handleDivClick(event, color6)}
-                >
-                  дальній план
-                </div>
-
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post7Ref}
-                  id="post7Id"
-                  onClick={(event) => handleDivClick(event, color7)}
-                >
-                  деталі
-                </div>
-
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post8Ref}
-                  id="post8Id"
-                  onClick={(event) => handleDivClick(event, color8)}
-                >
-                  текст
-                </div>
-
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post9Ref}
-                  id="post9Id"
-                  onClick={(event) => handleDivClick(event, color9)}
-                >
-                  портрет
-                </div>
-
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post10Ref}
-                  id="post10Id"
-                  onClick={(event) => handleDivClick(event, color10)}
-                >
-                  дальній план
-                </div>
-
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post11Ref}
-                  id="post11Id"
-                  onClick={(event) => handleDivClick(event, color11)}
-                >
-                  крупний план
-                </div>
-
-                {/* Пост */}
-                <div
-                  className="bg-muted flex items-center justify-center hover:cursor-pointer hover:opacity-80 transition"
-                  ref={post12Ref}
-                  id="post12Id"
-                  onClick={(event) => handleDivClick(event, color12)}
-                >
-                  природа
-                </div>
-              </div>
-            </div>
-          </div>
+          <Button
+            size="sm"
+            variant="ghost"
+            className="bg-primary text-muted hover:bg-third h-[40px]"
+            onClick={resetImages}
+          >
+            <p className="text-muted font-bold text-lg">СКИНУТИ ЗОБРАЖЕННЯ</p>
+          </Button>
         </div>
       </div>
+    </div>
   );
 };

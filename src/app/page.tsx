@@ -1,9 +1,3 @@
-// import { Editor } from "@/features/editor/components/ui/editor";
-// import { HomePage } from "@/app/home/page";
-
-// export default function Home() {
-//   return <HomePage />
-// }
 import { Button } from "@/components/ui/button";
 import { Unbounded } from "next/font/google";
 import Link from "next/link";
@@ -13,7 +7,7 @@ const unbounded = Unbounded({
   display: "swap",
 });
 
-export default function Home (){
+export default function Home() {
   return (
     <div className="flex justify-center bg-primary h-lvh">
       <div className={unbounded.className}>
@@ -48,9 +42,7 @@ export default function Home (){
               variant="ghost"
               className="bg-secondary text-primary p-6 hover:bg-third"
             >
-              <Link href="/editor" target="_blank">
-                Редактор графіки
-              </Link>
+              <Link href="/editor">Редактор графіки</Link>
             </Button>
             <Button
               asChild
@@ -58,14 +50,11 @@ export default function Home (){
               variant="ghost"
               className="bg-muted text-primary p-6 my-4 hover:bg-third"
             >
-              <Link href="/scheme" target="_blank">
-                Кольорова схема
-              </Link>
+              <Link href="/scheme">Кольорова схема</Link>
             </Button>
           </div>
         </main>
       </div>
     </div>
   );
-};
-
+}
